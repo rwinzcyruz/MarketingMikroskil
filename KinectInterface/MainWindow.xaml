@@ -1,0 +1,67 @@
+﻿<m:MetroWindow x:Class="KinectInterface.MainWindow"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
+               xmlns:l="clr-namespace:KinectInterface.Pages"
+               MinWidth="1366"
+               MinHeight="768"
+               WindowState="Maximized"
+               Icon="logo.ico"
+               ShowTitleBar="False"
+               ShowIconOnTitleBar="False"
+               ShowMinButton="False"
+               ShowCloseButton="False"
+               ShowMaxRestoreButton="False"
+               Topmost="False"
+               ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="/KinectInterface;component/Images/pattern.png" Stretch="Uniform"/>
+    </Window.Background>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro.Resources;component/Icons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml"/>
+                <ResourceDictionary Source="/Styles/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <m:MetroWindow.Flyouts>
+        <m:Flyout Background="#9f000000" Position="Right">
+            <StackPanel Width="320">
+                <m:Tile Title="My _Apps" Count="07" Margin="15">
+                    <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
+                </m:Tile>
+                <m:Tile Title="My _Apps" Count="08" Margin="15">
+                    <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
+                </m:Tile>
+                <m:Tile Title="My _Apps" Count="09" Margin="15">
+                    <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
+                </m:Tile>
+                <m:Tile Title="My _Apps" Count="10" Margin="15">
+                    <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
+                </m:Tile>
+            </StackPanel>
+        </m:Flyout>
+    </m:MetroWindow.Flyouts>
+    
+    <Viewbox>
+        <Grid x:Name="mainGrid">
+            <l:AboutUsPage x:Name="aboutUsPage" Visibility="Collapsed"/>
+            <l:QuizPage x:Name="quizPage" Visibility="Collapsed"/>
+            <l:LoginPage x:Name="loginPage" Visibility="Collapsed"/>
+            <l:GamePage x:Name="gamePage" Visibility="Collapsed"/>
+            <l:PlayPage x:Name="playPage" Visibility="Collapsed"/>
+            <l:ProfilePage x:Name="profilePage" Visibility="Collapsed"/>
+            <l:HomePage x:Name="homePage" Visibility="Collapsed"/>
+            <l:WelcomePage x:Name="welcomePage"/>
+        </Grid>
+    </Viewbox>
+</m:MetroWindow>

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="KinectInterface.Pages.LoginPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignWidth="1920"
+             d:DesignHeight="1080"
+             Width="1920"
+             Height="1080">
+
+    <DockPanel>
+        <Label DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}" Content="LOGIN">
+            <Label.Resources>
+                <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_key}"/>
+            </Label.Resources>
+        </Label>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBox MinWidth="1220" Margin="50" FontSize="{DynamicResource HeaderFontSize}"
+                    m:TextboxHelper.Watermark="Input Nama Anda"/>
+            <TextBox MinWidth="1220" Margin="50" FontSize="{DynamicResource HeaderFontSize}"
+                    m:TextboxHelper.Watermark="Input Nama Sekolah Anda"/>
+        </StackPanel>
+    </DockPanel>
+</UserControl>
