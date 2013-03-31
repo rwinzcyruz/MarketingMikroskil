@@ -195,7 +195,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\pattern.png" />
     <Resource Include="Images\placeholder_person.gif" />
   </ItemGroup>
   <ItemGroup>

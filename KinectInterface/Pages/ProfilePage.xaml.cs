@@ -42,10 +42,10 @@ namespace KinectInterface.Pages
                 txt.Text = i;
                 txt.Margin = new Thickness(20, 0, 0, 0);
                 txt.Foreground = Brushes.White;
-                txt.FontSize = (double)this.FindResource("NormalFontSize"); ;
+                txt.FontSize = (double)this.FindResource("NormalFontSize");
 
                 var sp = new StackPanel();
-                sp.Background = (Brush)bc.ConvertFrom("#FF2B579A");
+                sp.Background = (Brush)this.FindResource("SolidBrush");
                 DockPanel.SetDock(sp, Dock.Top);
                 sp.Children.Add(txt);
 

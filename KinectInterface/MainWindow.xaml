@@ -13,10 +13,9 @@
                ShowCloseButton="False"
                ShowMaxRestoreButton="False"
                Topmost="False"
-               ResizeMode="NoResize">
-    <Window.Background>
-        <ImageBrush ImageSource="/KinectInterface;component/Images/pattern.png" Stretch="Uniform"/>
-    </Window.Background>
+               ResizeMode="NoResize"
+               FontWeight="Thin"
+               Background="{StaticResource WindowBackground}">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -36,16 +35,16 @@
     <m:MetroWindow.Flyouts>
         <m:Flyout Background="#9f000000" Position="Right">
             <StackPanel Width="320">
-                <m:Tile Title="My _Apps" Count="07" Margin="15">
+                <m:Tile Title="Andy Wijaya" Count="8" Margin="15">
                     <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
                 </m:Tile>
-                <m:Tile Title="My _Apps" Count="08" Margin="15">
+                <m:Tile Title="Erwin" Count="8" Margin="15">
                     <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
                 </m:Tile>
-                <m:Tile Title="My _Apps" Count="09" Margin="15">
+                <m:Tile Title="Piko Hendra" Count="8" Margin="15">
                     <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
                 </m:Tile>
-                <m:Tile Title="My _Apps" Count="10" Margin="15">
+                <m:Tile Title="Viviani Sunario" Count="8" Margin="15">
                     <m:MetroImage Source="{StaticResource appbar_os_windows_8}" />
                 </m:Tile>
             </StackPanel>
@@ -53,7 +52,7 @@
     </m:MetroWindow.Flyouts>
     
     <Viewbox>
-        <Grid x:Name="mainGrid">
+        <Grid x:Name="mainGrid" Background="{DynamicResource BackgroundPattern}">
             <l:AboutUsPage x:Name="aboutUsPage" Visibility="Collapsed"/>
             <l:QuizPage x:Name="quizPage" Visibility="Collapsed"/>
             <l:LoginPage x:Name="loginPage" Visibility="Collapsed"/>

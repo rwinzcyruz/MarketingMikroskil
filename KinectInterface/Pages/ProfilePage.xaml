@@ -18,19 +18,17 @@
         </Image>
     </UserControl.Resources>
 
-    <DockPanel PreviewKeyDown="Arrow_PreviewKeyDown">
+    <DockPanel>
         <DockPanel.Background>
             <VisualBrush Visual="{StaticResource bg}"/>
         </DockPanel.Background>
 
-        <Label DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}" Content="PROFIL">
+        <Label Content="PROFIL" DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}">
             <Label.Resources>
                 <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_book}"/>
             </Label.Resources>
         </Label>
 
-        <Grid x:Name="ProfileGrid">
-            
-        </Grid>
+        <Grid x:Name="ProfileGrid"></Grid>
     </DockPanel>
 </UserControl>
