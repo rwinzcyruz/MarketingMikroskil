@@ -4,7 +4,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Linq;
-using System;
 
 namespace KinectInterface.Pages 
 {
@@ -67,10 +66,12 @@ namespace KinectInterface.Pages
             }
         }
 
-        public void Reset() {
+        public void Reset() 
+		{
             state = 0;
             ProfileGrid.Children[0].Visibility = Visibility.Visible;
-            for (int i = 1; i <= 5; i++) {
+            for (int i = 1; i <= 5; i++) 
+			{
                 ProfileGrid.Children[i].Visibility = Visibility.Collapsed;
             }
         }
@@ -116,7 +117,7 @@ namespace KinectInterface.Pages
 
         #region Kinect Navigation
 
-        private void Left_Swipe(object sender, RoutedEventArgs e)
+        public void Left_Swipe(object sender, RoutedEventArgs e)
         {
             if (state > 0)
             {
@@ -128,10 +129,11 @@ namespace KinectInterface.Pages
                 MainWindow win = (MainWindow)Window.GetWindow(this);
                 win.profilePage.Visibility = Visibility.Collapsed;
                 win.homePage.Visibility = Visibility.Visible;
+				win.changeState(states.Home);
             }
         }
 
-        private void Right_Swipe(object sender, RoutedEventArgs e)
+        public void Right_Swipe(object sender, RoutedEventArgs e)
         {
             if (state < 5)
             {
@@ -144,6 +146,7 @@ namespace KinectInterface.Pages
                 MainWindow win = (MainWindow)Window.GetWindow(this);
                 win.profilePage.Visibility = Visibility.Collapsed;
                 win.homePage.Visibility = Visibility.Visible;
+				win.changeState(states.Home);
             }
         }
 

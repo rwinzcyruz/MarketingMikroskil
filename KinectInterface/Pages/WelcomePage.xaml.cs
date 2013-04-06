@@ -10,9 +10,10 @@ namespace KinectInterface.Pages
             InitializeComponent();
         }
 
-        private void T_Pose(object sender, RoutedEventArgs e)
-        {
-
+        public void T_Pose(object sender, RoutedEventArgs e) {
+            MainWindow win = (MainWindow)Window.GetWindow(this);
+            win.welcomePage.Visibility = Visibility.Collapsed;
+            win.homePage.Visibility = Visibility.Visible;
         }
     }
 }

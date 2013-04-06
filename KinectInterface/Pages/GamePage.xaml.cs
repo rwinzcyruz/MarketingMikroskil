@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace KinectInterface.Pages 
 {
@@ -31,8 +19,28 @@ namespace KinectInterface.Pages
             switch (btn.Name) 
             {
                 case "_btnQuiz": win.loginPage.Visibility = Visibility.Visible; break;
-                case "_btnPlay": win.playPage.Visibility = Visibility.Visible; break;
+                case "_btnPlay": win.ktypePage.Visibility = Visibility.Visible; break;
             }
+        }
+
+		public void GameQuiz()
+        {
+            var win = (MainWindow)Window.GetWindow(this);
+            win.gamePage.Visibility = Visibility.Collapsed;
+            win.loginPage.Visibility = Visibility.Visible;
+            //ingat balikin
+            //win.changeState(states.GameQuiz);
+            //win.loginPage.toGameQuiz();
+        }
+        public void GameKtype()
+        {
+            var win = (MainWindow)Window.GetWindow(this);
+            win.gamePage.Visibility = Visibility.Collapsed;
+            
+            win.ktypePage.Visibility = Visibility.Visible;
+
+            win.changeState(states.GameKtype);
+            win.ktypePage.Start();
         }
     }
 }

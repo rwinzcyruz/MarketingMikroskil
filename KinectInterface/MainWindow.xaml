@@ -3,8 +3,8 @@
                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
                xmlns:l="clr-namespace:KinectInterface.Pages"
-               MinWidth="1366"
-               MinHeight="768"
+			   xmlns:my="clr-namespace:KinectInterface"
+               MinWidth="1024" MinHeight="576"
                WindowState="Maximized"
                Icon="logo.ico"
                ShowTitleBar="False"
@@ -52,15 +52,16 @@
     </m:MetroWindow.Flyouts>
     
     <Viewbox>
-        <Grid x:Name="mainGrid" Background="{DynamicResource BackgroundPattern}">
+        <Grid x:Name="LayoutRoot" Background="{DynamicResource BackgroundPattern}">
             <l:AboutUsPage x:Name="aboutUsPage" Visibility="Collapsed"/>
-            <l:QuizPage x:Name="quizPage" Visibility="Collapsed"/>
             <l:LoginPage x:Name="loginPage" Visibility="Collapsed"/>
+			<l:KtypePage x:Name="ktypePage" Visibility="Collapsed"/>
             <l:GamePage x:Name="gamePage" Visibility="Collapsed"/>
-            <l:PlayPage x:Name="playPage" Visibility="Collapsed"/>
+            <l:QuizPage x:Name="quizPage" Visibility="Collapsed"/>
             <l:ProfilePage x:Name="profilePage" Visibility="Collapsed"/>
             <l:HomePage x:Name="homePage" Visibility="Collapsed"/>
             <l:WelcomePage x:Name="welcomePage"/>
+			<my:SkeletonViewer x:Name="SkeletonViewerElement" BorderBrush="Red" BorderThickness="0"/>
         </Grid>
     </Viewbox>
 </m:MetroWindow>

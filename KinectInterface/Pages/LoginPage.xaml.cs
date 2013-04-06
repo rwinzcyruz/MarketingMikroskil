@@ -1,34 +1,50 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Data.OleDb;
 
 namespace KinectInterface.Pages 
 {
     public partial class LoginPage : UserControl 
     {
-        public LoginPage() 
-        {
+		//oledb
+        private string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.Windows.Forms.Application.StartupPath + "\\Kinect.accdb";
+        //odbc
+        private string otherdbPath = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + System.Windows.Forms.Application.StartupPath + "\\Kinect.accdb";
+        
+		public LoginPage() {
             InitializeComponent();
         }
 
-        private void Login(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var btn = (Button)e.OriginalSource;
-            var win = (MainWindow)Window.GetWindow(this);
+            if (txtNama.Text.Length > 0 && txtSekolah.Text.Length > 0)
+            {
+                using (OleDbConnection con = new OleDbConnection(dbPath))
+                {
+                    con.Open();
 
+                    string sql = "insert into KinectUser(nama,sekolah,tanggal) values('" + txtNama.Text + "','" + txtSekolah.Text + "','" + DateTime.Now + "')";
+
+                    using (OleDbCommand cmd = new OleDbCommand(sql, con))
+                    {
+                        cmd.ExecuteNonQuery();
+                        txtNama.Text = "";
+                        txtSekolah.Text = "";
+                        toGameQuiz();
+                    }
+                }
+            }
+        }
+
+        public void toGameQuiz()
+        {
+            var win = (MainWindow)Window.GetWindow(this);
             win.loginPage.Visibility = Visibility.Collapsed;
             win.quizPage.Visibility = Visibility.Visible;
+            win.changeState(states.GameQuiz);
+            win.quizPage.CreateQuestion();
+            win.quizPage.QuizReset();
         }
     }
 }

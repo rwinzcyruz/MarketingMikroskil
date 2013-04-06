@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="KinectInterface.Pages.KtypePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:my="clr-namespace:Beginning.Kinect.Framework.Controls;assembly=Beginning.Kinect.Framework"
+             mc:Ignorable="d" 
+             d:DesignWidth="1920" d:DesignHeight="1080"
+             Width="1920" Height="1080"
+             Background="#7FFFFFFF">
+
+    <DockPanel>
+        <Label DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}" Content="K-TYPE MASTER">
+            <Label.Resources>
+                <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_tiles_sixteen}"/>
+            </Label.Resources>
+        </Label>
+        
+
+        <Grid DockPanel.Dock="Bottom">
+    
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="1" Visibility="Collapsed"  Height="96" HorizontalAlignment="Left" Margin="1618,578,0,0" Name="txtPenampung" VerticalAlignment="Top" Width="242" TextChanged="txtPenampung_TextChanged" />
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="1500,680,0,207" Name="textBlock1" Text="Live" Width="360" TextAlignment="Center" FontSize="64" />
+            <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="1500,809,0,0" Name="txtBlive" Text="3" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
+            <TextBlock FontSize="64" HorizontalAlignment="Left" Margin="60,680,0,0" Name="textBlock2" Text="Score" TextAlignment="Center" Width="360" Grid.Row="1" Height="123" VerticalAlignment="Top" />
+            <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="60,809,0,0" Name="txtBscore" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
+            <TextBlock FontSize="120" Height="170" HorizontalAlignment="Left" Margin="780,762,0,0" Name="txtBhuruf" Text="A" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
+            <TextBlock FontSize="64" HorizontalAlignment="Left" Margin="780,633,0,254" Name="textBlock3" Text="Huruf" TextAlignment="Center" Width="360" Grid.Row="1" />
+            <my:Keyboard Grid.Row="1" HorizontalAlignment="Left" Margin="68,32,0,0" Name="keyboard" VerticalAlignment="Top" />
+            
+        </Grid>
+    </DockPanel>
+
+</UserControl>

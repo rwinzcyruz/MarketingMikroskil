@@ -1,14 +1,12 @@
 ﻿<UserControl x:Class="KinectInterface.Pages.LoginPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
-             d:DesignWidth="1920"
-             d:DesignHeight="1080"
-             Width="1920"
-             Height="1080"
+             d:DesignWidth="1920" d:DesignHeight="1080"
+             Width="1920" Height="1080"
              Background="#7FFFFFFF">
 
     <DockPanel>
@@ -20,9 +18,12 @@
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox MinWidth="1220" Margin="50" FontSize="{DynamicResource HeaderFontSize}"
-                    m:TextboxHelper.Watermark="Input Nama Anda"/>
+                    m:TextboxHelper.Watermark="Input Nama Anda" Name="txtNama"/>
             <TextBox MinWidth="1220" Margin="50" FontSize="{DynamicResource HeaderFontSize}"
-                    m:TextboxHelper.Watermark="Input Nama Sekolah Anda"/>
+                    m:TextboxHelper.Watermark="Input Nama Sekolah Anda" Name="txtSekolah"/>
+			<Button Name="btnLogin" Content="OK" Width="500"
+					HorizontalAlignment="Right" FontSize="{DynamicResource HeaderFontSize}" Margin="50"
+					BorderBrush="#FF653838" BorderThickness="2" Click="btnLogin_Click" IsDefault="True"/>
         </StackPanel>
     </DockPanel>
 </UserControl>
