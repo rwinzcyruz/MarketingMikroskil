@@ -15,14 +15,14 @@
                 <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_home}"/>
             </Label.Resources>
         </Label>
-		<TextBlock DockPanel.Dock="Top" FontSize="64" Name="txtJurusan" Text="Hasil" Width="200" />
+		<TextBlock DockPanel.Dock="Top" FontSize="{DynamicResource ContentFontSize}" Name="txtJurusan" Text="Hasil" HorizontalAlignment="Center"/>
         <UniformGrid Columns="2" Button.Click="Navigate_Click" Margin="30,30,0,0">
-            <Button x:Name="_btnProfile" Content="profil" Grid.Column="0" Template="{DynamicResource BoxButtonTemplate}">
+            <Button x:Name="_btnProfile" Content="profil" Template="{DynamicResource BoxButtonTemplate}">
                 <Button.Resources>
                     <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_book}"/>
                 </Button.Resources>
             </Button>
-            <Button x:Name="_btnGame" Content="permainan" Grid.Column="1" Template="{DynamicResource BoxButtonTemplate}">
+            <Button x:Name="_btnGame" Content="permainan" Template="{DynamicResource BoxButtonTemplate}">
                 <Button.Resources>
                     <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_xbox}"/>
                 </Button.Resources>

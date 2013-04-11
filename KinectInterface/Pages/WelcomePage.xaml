@@ -8,10 +8,11 @@
         	 d:DesignWidth="1920" d:DesignHeight="1080"
              Width="1920" Height="1080">
     
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+    <UniformGrid Rows="3">
+        <TextBlock Text="&lt;/selamat datang/&gt;" FontSize="{DynamicResource TitleFontSize}" FontWeight="Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Viewbox Width="300" Height="200">
             <Canvas Width="300" Height="200" Background="{StaticResource MikroskilLogo}"/>
         </Viewbox>
-        <TextBlock Text="selamat datang" HorizontalAlignment="Center" FontSize="{DynamicResource HeaderFontSize}"/>
-    </StackPanel>
+        <TextBlock Text="/tekan Home untuk memulai/" FontSize="{DynamicResource ContentFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </UniformGrid>
 </UserControl>

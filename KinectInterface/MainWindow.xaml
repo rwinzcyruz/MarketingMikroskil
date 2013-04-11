@@ -14,7 +14,6 @@
                ShowMaxRestoreButton="False"
                Topmost="False"
                ResizeMode="NoResize"
-               FontWeight="Thin"
                Background="{StaticResource WindowBackground}">
 
     <Window.Resources>
@@ -53,6 +52,7 @@
     
     <Viewbox>
         <Grid x:Name="LayoutRoot" Background="{DynamicResource BackgroundPattern}">
+            <l:ProfileContentPage x:Name="profileContentPage" Visibility="Collapsed"/>
             <l:AboutUsPage x:Name="aboutUsPage" Visibility="Collapsed"/>
             <l:LoginPage x:Name="loginPage" Visibility="Collapsed"/>
 			<l:KtypePage x:Name="ktypePage" Visibility="Collapsed"/>

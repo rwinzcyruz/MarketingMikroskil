@@ -4,9 +4,10 @@
     <FontFamily x:Key="DefaultFont">Segoe UI, Lucida Sans Unicode, Verdana</FontFamily>
     <FontFamily x:Key="HeaderFontFamily">Segoe UI Light, Lucida Sans Unicode, Verdana</FontFamily>
     <FontFamily x:Key="ContentFontFamily">Segoe UI, Lucida Sans Unicode, Verdana</FontFamily>
-    
-    <System:Double x:Key="HeaderFontSize">100</System:Double>
-    <System:Double x:Key="SubHeaderFontSize">80</System:Double>
-    <System:Double x:Key="NormalFontSize">60</System:Double>
-    <System:Double x:Key="ContentFontSize">40</System:Double>
+
+    <System:Double x:Key="TitleFontSize">112</System:Double>
+    <System:Double x:Key="HeaderFontSize">80</System:Double>
+    <System:Double x:Key="SubHeaderFontSize">56</System:Double>
+    <System:Double x:Key="NormalFontSize">32</System:Double>
+    <System:Double x:Key="ContentFontSize">24</System:Double>
 </ResourceDictionary>

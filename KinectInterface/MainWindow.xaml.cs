@@ -55,8 +55,8 @@ namespace KinectInterface
                         homePage.Visibility = Visibility.Collapsed;
                         gamePage.Visibility = Visibility.Collapsed;
                         aboutUsPage.Visibility = Visibility.Collapsed;
-                        loginPage .Visibility = Visibility.Collapsed;
-                        quizPage .Visibility = Visibility.Collapsed;
+                        loginPage.Visibility = Visibility.Collapsed;
+                        quizPage.Visibility = Visibility.Collapsed;
                         ktypePage.Visibility = Visibility.Collapsed;
                         profilePage.Visibility = Visibility.Collapsed;
                         SkeletonViewerElement.Margin = new Thickness(254, 6, 182, 11);
@@ -76,7 +76,7 @@ namespace KinectInterface
                     case states.GameQuiz :
                         
                         break;
-                    case states .GameKtype :
+                    case states.GameKtype :
 
                         break;
                 }
@@ -357,7 +357,7 @@ namespace KinectInterface
             recognizer.SwipeRightDetected += (s, e) =>
             {
                 if (state == states.Home) homePage.GameShow();
-                else if (state == states.Profil) profilePage.Right_Swipe(null, null);
+                //else if (state == states.Profil) profilePage.Right_Swipe(null, null);
                 else if (state == states.Game) gamePage.GameKtype();
             };
 
@@ -365,7 +365,7 @@ namespace KinectInterface
             recognizer.SwipeLeftDetected += (s, e) =>
             {
                 if (state == states.Home) homePage.ProfileShow();
-                else if (state == states.Profil) profilePage.Left_Swipe(null, null);
+                //else if (state == states.Profil) profilePage.Left_Swipe(null, null);
                 else if (state == states.Game) gamePage.GameQuiz();
             };
 
@@ -426,7 +426,6 @@ namespace KinectInterface
             {
                 LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
                 homePage.Visibility = Visibility.Visible;
-                profilePage.Reset();
             }
             else if (e.Key == Key.End)
             {

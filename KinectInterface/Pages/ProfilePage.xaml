@@ -6,33 +6,48 @@
         	 xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
         	 mc:Ignorable="d" 
         	 d:DesignWidth="1920" d:DesignHeight="1080"
-             Width="1920" Height="1080"
-             Background="White"
-             PreviewKeyDown="Arrow_PreviewKeyDown" 
-             KeyDown="Arrow_PreviewKeyDown">
-
-    <UserControl.Resources>
-        <Image x:Key="bg" Source="/KinectInterface;component/Images/college.jpg">
-            <Image.OpacityMask>
-                <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
-                    <GradientStop Offset="0.0" Color="Transparent"/>
-                    <GradientStop Offset="2.0" Color="White"/>
-                </LinearGradientBrush>
-            </Image.OpacityMask>
-        </Image>
-    </UserControl.Resources>
+             Width="1920" Height="1080">
 
     <DockPanel>
-        <DockPanel.Background>
-            <VisualBrush Visual="{StaticResource bg}"/>
-        </DockPanel.Background>
-
         <Label Content="PROFIL" DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}">
             <Label.Resources>
                 <VisualBrush x:Key="_icon" Visual="{DynamicResource appbar_book}"/>
             </Label.Resources>
         </Label>
-
-        <Grid x:Name="ProfileGrid"></Grid>
+        
+        <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">        
+            <UniformGrid x:Name="ProfileGrid" Columns="6" Width="3228" Margin="90,30,60,0" Focusable="True" Button.Click="Navigate_Click">
+                <Button x:Name="_btnTI" Tag="Teknik Informatika" Content="TI" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ffbc1c48"/>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="_btnSI" Tag="Sistem Informasi" Content="SI" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ff0a59c2"/>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="_btnMA" Tag="Manajemen" Content="MA" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ff0099ab"/>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="_btnAK" Tag="Akuntansi" Content="AK" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ff00a200"/>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="_btnMI" Tag="Manajemen Informatika" Content="MI" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ffd44928"/>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="_btnKA" Tag="Komputerisasi Akuntansi" Content="KA" Template="{DynamicResource ImageButtonTemplate}">
+                    <Button.Resources>
+                        <SolidColorBrush x:Key="_hover" Color="#ff5f3bb9"/>
+                    </Button.Resources>
+                </Button>
+            </UniformGrid> 
+        </ScrollViewer>
     </DockPanel>
 </UserControl>
