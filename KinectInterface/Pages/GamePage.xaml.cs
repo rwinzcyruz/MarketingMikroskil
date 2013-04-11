@@ -27,10 +27,10 @@ namespace KinectInterface.Pages
         {
             var win = (MainWindow)Window.GetWindow(this);
             win.gamePage.Visibility = Visibility.Collapsed;
-            win.loginPage.Visibility = Visibility.Visible;
+           // win.loginPage.Visibility = Visibility.Visible;
             //ingat balikin
-            //win.changeState(states.GameQuiz);
-            //win.loginPage.toGameQuiz();
+            win.changeState(states.GameQuiz);
+            win.loginPage.toGameQuiz();
         }
         public void GameKtype()
         {

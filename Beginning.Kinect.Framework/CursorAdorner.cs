@@ -30,8 +30,8 @@ namespace Beginning.Kinect.Framework
         Storyboard _gradientStopAnimationStoryboard;
 
         // default cursor colors
-        readonly static  Color _backColor = Colors.White;
-        readonly static Color _foreColor = Colors.Gray;
+        readonly static  Color _backColor = Colors.Black ;
+        readonly static Color _foreColor = Colors.White ;
 
 
         /// <summary>

@@ -16,14 +16,16 @@
             </Label.Resources>
         </Label>
 
-		<Grid Name="QuizGrid">
-            <TextBlock Height="192" HorizontalAlignment="Left" Margin="60,680,0,0" Name="txtQuestion" Text="" VerticalAlignment="Top" Width="1814" FontSize="64" />
+		<Grid Name="QuizGrid" Margin="0,0,0,192">
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="60,34,0,0" Name="txtB1" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="60,240,0,0" Name="txtB2" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="60,469,0,0" Name="txtB3" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="1287,34,0,0" Name="txtB4" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="1287,240,0,0" Name="txtB5" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
             <TextBlock FontSize="64" Height="156" HorizontalAlignment="Left" Opacity=" 0.3" Margin="1287,469,0,0" Name="txtB6" Text="" VerticalAlignment="Top" Width="587" TextWrapping="Wrap" />
+        </Grid>
+        <Grid>
+            <TextBlock Height="192" HorizontalAlignment="Left" Margin="-1824,725,0,0" Name="txtQuestion" Text="" VerticalAlignment="Top" Width="1814" FontSize="64" />
         </Grid>
     </DockPanel>
 </UserControl>

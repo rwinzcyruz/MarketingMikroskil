@@ -37,6 +37,7 @@ namespace KinectInterface
         #region Member Variables
         private readonly Brush[] _SkeletonBrushes = new Brush[] { Brushes.Black, Brushes.Crimson, Brushes.Indigo, Brushes.DodgerBlue, Brushes.Purple, Brushes.Pink };
         private Skeleton[] _FrameSkeletons;
+        private bool isshowHand ;
         #endregion Member Variables
 
 
@@ -57,19 +58,57 @@ namespace KinectInterface
             {
                 if(frame != null)
                 {
-                    if(this.IsEnabled)
+                    if (this.IsEnabled)
                     {
-                        frame.CopySkeletonDataTo(this._FrameSkeletons);                
+                        frame.CopySkeletonDataTo(this._FrameSkeletons);
 
-                        for(int i = 0; i < this._FrameSkeletons.Length; i++)
-                        {                        
+                        for (int i = 0; i < this._FrameSkeletons.Length; i++)
+                        {
                             DrawSkeleton(this._FrameSkeletons[i], this._SkeletonBrushes[i]);
+                        }
+                    }
+                    else if(isShowHand)
+                    {
+                        frame.CopySkeletonDataTo(this._FrameSkeletons);
+                        Skeleton skeleton = GetPrimarySkeleton(this._FrameSkeletons);
+                        if (skeleton!=null )
+                        {
+                            TrackHand(skeleton.Joints[JointType.HandLeft], LeftHandElement, LayoutRoot);
+                            TrackHand(skeleton.Joints[JointType.HandRight], RightHandElement, LayoutRoot);
                         }
                     }
                 }                
             }
         }
 
+        private static Skeleton GetPrimarySkeleton(Skeleton[] skeletons)
+        {
+            Skeleton skeleton = null;
+
+            if (skeletons != null)
+            {
+                //Find the closest skeleton       
+                for (int i = 0; i < skeletons.Length; i++)
+                {
+                    if (skeletons[i].TrackingState == SkeletonTrackingState.Tracked)
+                    {
+                        if (skeleton == null)
+                        {
+                            skeleton = skeletons[i];
+                        }
+                        else
+                        {
+                            if (skeleton.Position.Z > skeletons[i].Position.Z)
+                            {
+                                skeleton = skeletons[i];
+                            }
+                        }
+                    }
+                }
+            }
+
+            return skeleton;
+        }
 
         private void DrawSkeleton(Skeleton skeleton, Brush brush)
         {
@@ -99,6 +138,20 @@ namespace KinectInterface
             }
         }
 
+        private void TrackHand(Joint hand, FrameworkElement cursorElement, FrameworkElement container)
+        {
+            if (hand.TrackingState == JointTrackingState.NotTracked)
+            {
+                cursorElement.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                cursorElement.Visibility = Visibility.Visible;
+                Point jointPoint = GetJointPointHand(this.KinectDevice, hand, container.RenderSize, new Point(cursorElement.ActualWidth / 2.0, cursorElement.ActualHeight / 2.0));
+                Canvas.SetLeft(cursorElement, jointPoint.X);
+                Canvas.SetTop(cursorElement, jointPoint.Y);
+            }
+        }
 
         private Polyline CreateFigure(Skeleton skeleton, Brush brush, JointType[] joints)
         {
@@ -115,6 +168,14 @@ namespace KinectInterface
             return figure;
         }
 
+        private static Point GetJointPointHand(KinectSensor kinectDevice, Joint joint, Size containerSize, Point offset)
+        {
+            DepthImagePoint point = kinectDevice.MapSkeletonPointToDepth(joint.Position, kinectDevice.DepthStream.Format);
+            point.X = (int)((point.X * containerSize.Width / kinectDevice.DepthStream.FrameWidth) - offset.X);
+            point.Y = (int)((point.Y * containerSize.Height / kinectDevice.DepthStream.FrameHeight) - offset.Y);
+
+            return new Point(point.X, point.Y);
+        }
                                                                                   
         private Point GetJointPoint(Joint joint)
         {
@@ -156,6 +217,18 @@ namespace KinectInterface
         {
             get { return (KinectSensor)GetValue(KinectDeviceProperty); }
             set { SetValue(KinectDeviceProperty, value); }
+        }
+        public bool isShowHand
+        {
+            get { return isshowHand; }
+            set { 
+                isshowHand = value;
+                if (!isshowHand)
+                {
+                    LeftHandElement.Visibility = Visibility.Collapsed;
+                    RightHandElement.Visibility = Visibility.Collapsed;
+                }
+            }
         }
         #endregion KinectDevice
         #endregion Properties   

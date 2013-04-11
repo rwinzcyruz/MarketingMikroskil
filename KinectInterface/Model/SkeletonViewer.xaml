@@ -6,6 +6,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid x:Name="LayoutRoot">
-        <Grid x:Name="SkeletonsPanel"/>                    
+        <Grid x:Name="SkeletonsPanel"/>
+        <Canvas x:Name="HandCanvas">
+            <Image x:Name="RightHandElement" Source="/KinectInterface;component/Images/hand.png" Visibility="Collapsed" Height="100" Width="100">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <TranslateTransform X="-100"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image> 
+
+            <Image x:Name="LeftHandElement" Source="/KinectInterface;component/Images/hand.png" Visibility="Collapsed" Height="100" Width="100">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="-1"/>
+                        <TranslateTransform X="140"/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Canvas>
     </Grid>
 </UserControl>

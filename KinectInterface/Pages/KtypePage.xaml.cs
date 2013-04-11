@@ -2,7 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Threading;
 namespace KinectInterface.Pages
 {
     public partial class KtypePage : UserControl
@@ -10,13 +10,25 @@ namespace KinectInterface.Pages
         private int live;
         private int score;
         private string hrf;
-        
+        private int time;
+        private DispatcherTimer idleTimer;
         public KtypePage()
         {
             InitializeComponent();
+            idleTimer = new DispatcherTimer();
+            idleTimer.Tick += new EventHandler(this.idleTime);
+            idleTimer.Interval = new TimeSpan(0, 0, 1);
             this.keyboard.setBlock(txtPenampung);
         }
-        
+        public void idleTime(object sender, EventArgs e)
+        {
+            time -= 1;
+            txtBTime.Text = time.ToString();
+            if (time == 0)
+            {
+                GameOver();
+            }
+        }
         public void cekJawaban(string huruf)
         {
             if (huruf.Equals(hrf))
@@ -42,6 +54,8 @@ namespace KinectInterface.Pages
         {
             live = 3;
             score = 0;
+            time = 60;
+            idleTimer.Start();
             reload();
         }
 
@@ -51,14 +65,15 @@ namespace KinectInterface.Pages
             txtBlive.Text = live.ToString();
             txtBscore.Text = score.ToString();
             txtBhuruf.Text = hrf.ToString();
+            txtBTime.Text = time.ToString();
         }
 
         public void GameOver()
         {
+            idleTimer.Stop();
             var win = (MainWindow)Window.GetWindow(this);
             win.ktypePage.Visibility = Visibility.Collapsed;
             win.homePage.Visibility = Visibility.Visible;
-
             win.changeState(states.Home );
         }
 
