@@ -6,7 +6,7 @@ using System.Windows.Input;
 using MahApps.Metro.Controls;
 using Microsoft.Kinect;
 using Microsoft.Samples.Kinect.SwipeGestureRecognizer;
-
+using System.Windows.Threading;
 namespace KinectInterface
 {
 	public enum states
@@ -29,8 +29,11 @@ namespace KinectInterface
         private Pose Tpose;
         private readonly Recognizer actRecognizer;
         private states state;
-        int no = 0;
-        
+        private Instruction instruction;
+        private DispatcherTimer instructionTimer;
+        private int instructionSecond = 3;
+        //instruction disabling
+        private bool kinectDisable;
         public MainWindow() {
             InitializeComponent();
 			EventManager.RegisterClassHandler(typeof(Window), Window.KeyDownEvent, new KeyEventHandler(AppHotkeyKeyDown));
@@ -40,8 +43,31 @@ namespace KinectInterface
             KinectSensor.KinectSensors.StatusChanged += KinectSensors_StatusChanged;
             this.KinectDevice = KinectSensor.KinectSensors.FirstOrDefault(x => x.Status == KinectStatus.Connected);
             state = states.Welcome;
+
+            //timer for instruction
+            instruction = new Instruction();
+            kinectDisable = false;
+            instructionTimer = new DispatcherTimer();
+            instructionTimer.Tick += new EventHandler(this.instrucTime);
+            instructionTimer.Interval = new TimeSpan(0, 0, instructionSecond );
         }
 
+        //show instruction
+        public void showInstruction(string comment)
+        {
+            instruction.txtA.Text = comment;
+            instruction.Show();
+            instructionTimer.Start();
+            kinectDisable = true;   
+        }
+        //instruc event
+        public void instrucTime(object sender, EventArgs e)
+        {
+            instructionTimer.Stop();
+            kinectDisable = false;
+            instruction.Hide();
+            
+        }
         //semua state
         public void changeState(states newState)
         {
@@ -51,7 +77,7 @@ namespace KinectInterface
                 switch (this.state)
                 {
                     case states.Welcome:
-                        welcomePage.Visibility = Visibility.Visible;
+                        
                         homePage.Visibility = Visibility.Collapsed;
                         gamePage.Visibility = Visibility.Collapsed;
                         aboutUsPage.Visibility = Visibility.Collapsed;
@@ -59,25 +85,37 @@ namespace KinectInterface
                         quizPage .Visibility = Visibility.Collapsed;
                         ktypePage.Visibility = Visibility.Collapsed;
                         profilePage.Visibility = Visibility.Collapsed;
+                        welcomePage.Visibility = Visibility.Visible;
+                        SkeletonViewerElement.isShowHand = false;
                         SkeletonViewerElement.Margin = new Thickness(254, 6, 182, 11);
                         SkeletonViewerElement.BorderThickness = new Thickness(0);
                         break;
                        
                     case states.Home:
-                        
+                        showInstruction("home instruct");
+                        homePage.Visibility = Visibility.Visible;
+                        gamePage.Visibility = Visibility.Collapsed;
+                        aboutUsPage.Visibility = Visibility.Collapsed;
+                        loginPage .Visibility = Visibility.Collapsed;
+                        quizPage .Visibility = Visibility.Collapsed;
+                        ktypePage.Visibility = Visibility.Collapsed;
+                        profilePage.Visibility = Visibility.Collapsed;
+                        welcomePage.Visibility = Visibility.Collapsed;
+                        SkeletonViewerElement.isShowHand = true;
                         break;
 
                     case states.Profil:
-
+                        showInstruction("profil instruct");
                         break;
                     case states.Game:
-
+                        showInstruction("game instruct");
                         break;
                     case states.GameQuiz :
-                        
+                        showInstruction("gameQuiz instruct");
                         break;
                     case states .GameKtype :
-
+                        showInstruction("ktype instruct");
+                        SkeletonViewerElement.isShowHand = false ;
                         break;
                 }
             }
@@ -107,6 +145,7 @@ namespace KinectInterface
 
         private void KinectDevice_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
+            if (kinectDisable) return;
             using (SkeletonFrame frame = e.OpenSkeletonFrame())
             {
                 if (frame != null)
@@ -123,8 +162,8 @@ namespace KinectInterface
                         SkeletonViewerElement.BorderThickness = new Thickness(0);
                         if (isTpose(skeleton))
                         {
-                            //areT.Text = "Ok \n T";
-                            SkeletonViewerElement.Visibility = Visibility.Collapsed;
+                            //hide skeleton to view                           
+                            SkeletonViewerElement.IsEnabled = false;
                             SkeletonViewerElement.Margin = new Thickness(0, 0, 0, 0);
 
                             welcomePage.T_Pose(null, null);
@@ -133,8 +172,8 @@ namespace KinectInterface
                         }
                         else if(state == states .Welcome )
                         {
-                            //areT.Text = "no \n T";
-                            SkeletonViewerElement.Visibility = Visibility.Visible;
+                            //show skeleton to view 
+                            SkeletonViewerElement.IsEnabled = true ;
                             SkeletonViewerElement.Margin = new Thickness(254, 6, 182, 11);
                         }
                         else if (state == states.GameQuiz)
@@ -144,7 +183,7 @@ namespace KinectInterface
                             bool hasTargetChange = (leftTarget != this.LeftQuizTarget) || (rightTarget != this.RightQuizTarget);
                             if (hasTargetChange)
                             {
-                                for (int z = 1; z <= 6; z++)
+                                for (int z = 0; z <= 5; z++)
                                 {
                                     if (leftTarget != null && rightTarget != null)
                                     {
@@ -153,7 +192,7 @@ namespace KinectInterface
                                     else if ((LeftQuizTarget == quizPage.QuizGrid.Children[z] && RightQuizTarget == null) ||
                                             (RightQuizTarget == quizPage.QuizGrid.Children[z] && LeftQuizTarget == null))
                                     {                                       
-                                        quizPage.AnswerIs(z);
+                                        quizPage.AnswerIs(z+1);
                                         break;
                                     }
                                     else if (leftTarget != null || rightTarget != null)

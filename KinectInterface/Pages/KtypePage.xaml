@@ -26,14 +26,16 @@
             </Grid.RowDefinitions>
 
             <TextBox Grid.Row="1" Visibility="Collapsed"  Height="96" HorizontalAlignment="Left" Margin="1618,578,0,0" Name="txtPenampung" VerticalAlignment="Top" Width="242" TextChanged="txtPenampung_TextChanged" />
-            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="1500,680,0,207" Name="textBlock1" Text="Live" Width="360" TextAlignment="Center" FontSize="64" />
-            <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="1500,809,0,0" Name="txtBlive" Text="3" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="425,680,0,142" Name="textBlock1" Text="Live" Width="360" TextAlignment="Center" FontSize="64" />
+            <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="425,812,0,0" Name="txtBlive" Text="3" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
             <TextBlock FontSize="64" HorizontalAlignment="Left" Margin="60,680,0,0" Name="textBlock2" Text="Score" TextAlignment="Center" Width="360" Grid.Row="1" Height="123" VerticalAlignment="Top" />
             <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="60,809,0,0" Name="txtBscore" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
             <TextBlock FontSize="120" Height="170" HorizontalAlignment="Left" Margin="780,762,0,0" Name="txtBhuruf" Text="A" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
-            <TextBlock FontSize="64" HorizontalAlignment="Left" Margin="780,633,0,254" Name="textBlock3" Text="Huruf" TextAlignment="Center" Width="360" Grid.Row="1" />
+            <TextBlock FontSize="64" HorizontalAlignment="Left" Margin="780,633,0,213" Name="textBlock3" Text="Huruf" TextAlignment="Center" Width="360" Grid.Row="1" />
             <my:Keyboard Grid.Row="1" HorizontalAlignment="Left" Margin="68,32,0,0" Name="keyboard" VerticalAlignment="Top" />
-            
+            <TextBlock Grid.Row="1" HorizontalAlignment="Left" Margin="1500,677,0,145" x:Name="textBlock1_Copy" Text="Waktu" Width="360" TextAlignment="Center" FontSize="64" />
+            <TextBlock FontSize="72" Height="123" HorizontalAlignment="Left" Margin="1500,809,0,0" x:Name="txtBTime" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="360" Grid.Row="1" />
+
         </Grid>
     </DockPanel>
 

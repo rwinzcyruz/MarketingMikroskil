@@ -32,7 +32,7 @@ namespace KinectInterface.Pages
         public void CreateQuestion(){
             string []jawaban;
             txtQuestion.Text = ds.Tables["soal"].Rows[no][0].ToString();
-            for (int z = 1; z <= 6; z++)
+            for (int z = 0; z < 6; z++)
             {   
                 jawaban = ds.Tables["soal"].Rows[no][z].ToString().Split('|');
                 ((TextBlock)QuizGrid.Children[z]).Text = jawaban[0];
