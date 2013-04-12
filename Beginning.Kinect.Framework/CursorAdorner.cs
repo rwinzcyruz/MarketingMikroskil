@@ -13,7 +13,9 @@ namespace Beginning.Kinect.Framework
     using System.Windows.Shapes;
     using System.Windows.Media.Animation;
     using System.Diagnostics;
-
+    
+    //untuk setcursor
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// CursorAdorner is a visual representation of the tracking hand.
@@ -33,6 +35,9 @@ namespace Beginning.Kinect.Framework
         readonly static  Color _backColor = Colors.Black ;
         readonly static Color _foreColor = Colors.White ;
 
+        //setcursor function
+        [DllImport("USER32.dll", CallingConvention = CallingConvention.StdCall)]
+        static extern void SetCursorPos(int X, int Y);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CursorAdorner"/> class.
@@ -83,6 +88,8 @@ namespace Beginning.Kinect.Framework
             // center the cursor visual at the new position
             _cursor.SetValue(Canvas.LeftProperty, position.X - (_cursor.ActualWidth / 2));
             _cursor.SetValue(Canvas.TopProperty, position.Y - (_cursor.ActualHeight / 2));
+            SetCursorPos((int)position.X, (int)position.Y);
+            
         }
 
         /// <summary>
@@ -96,6 +103,8 @@ namespace Beginning.Kinect.Framework
             // center the cursor visual at the new position
             _cursor.SetValue(Canvas.LeftProperty, position.X - (_cursor.ActualWidth / 2));
             _cursor.SetValue(Canvas.TopProperty, position.Y - (_cursor.ActualHeight / 2));
+            SetCursorPos((int)position.X, (int)position.Y);
+            
         }
 
         /// <summary>

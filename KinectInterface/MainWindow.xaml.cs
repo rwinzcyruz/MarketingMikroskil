@@ -50,6 +50,9 @@ namespace KinectInterface
             instructionTimer = new DispatcherTimer();
             instructionTimer.Tick += new EventHandler(this.instrucTime);
             instructionTimer.Interval = new TimeSpan(0, 0, instructionSecond );
+
+            //hide cursor
+            this.Cursor = Cursors.None;
         }
 
         //show instruction

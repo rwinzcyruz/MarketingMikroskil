@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:my="clr-namespace:Beginning.Kinect.Framework.Controls;assembly=Beginning.Kinect.Framework">
 
     <SolidColorBrush x:Key="TransparentBrush" Color="{DynamicResource AccentColor}" Opacity="0.1"/>
     <SolidColorBrush x:Key="SemiTransparentBrush" Color="{DynamicResource AccentColor}" Opacity="0.4"/>
@@ -23,7 +24,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ImageButtonTemplate" TargetType="Button">
+    <ControlTemplate x:Key="ImageButtonTemplate" TargetType="my:HoverButton" >
         <Border Name="Border" Background="Gray" Opacity="0.5" BorderBrush="Transparent"
                 BorderThickness="4" Margin="0,0,30,30" SnapsToDevicePixels="True" RenderOptions.EdgeMode="Aliased">
             <Canvas Width="500" ClipToBounds="True">

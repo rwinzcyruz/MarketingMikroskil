@@ -4,6 +4,7 @@
         	 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         	 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         	 xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:my="clr-namespace:Beginning.Kinect.Framework.Controls;assembly=Beginning.Kinect.Framework" 
         	 mc:Ignorable="d" 
         	 d:DesignWidth="1920" d:DesignHeight="1080"
              Width="1920" Height="1080">
@@ -17,36 +18,36 @@
         
         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">        
             <UniformGrid x:Name="ProfileGrid" Columns="6" Width="3228" Margin="90,30,60,0" Focusable="True" Button.Click="Navigate_Click">
-                <Button x:Name="_btnTI" Tag="Teknik Informatika" Content="TI" Template="{DynamicResource ImageButtonTemplate}">
+                <my:HoverButton  x:Name="_btnTI" Tag="Teknik Informatika" Content="TI" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ffbc1c48"/>
                     </Button.Resources>
-                </Button>
-                <Button x:Name="_btnSI" Tag="Sistem Informasi" Content="SI" Template="{DynamicResource ImageButtonTemplate}">
+                </my:HoverButton>
+                <my:HoverButton x:Name="_btnSI" Tag="Sistem Informasi" Content="SI" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ff0a59c2"/>
                     </Button.Resources>
-                </Button>
-                <Button x:Name="_btnMA" Tag="Manajemen" Content="MA" Template="{DynamicResource ImageButtonTemplate}">
+                </my:HoverButton>
+                <my:HoverButton x:Name="_btnMA" Tag="Manajemen" Content="MA" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ff0099ab"/>
                     </Button.Resources>
-                </Button>
-                <Button x:Name="_btnAK" Tag="Akuntansi" Content="AK" Template="{DynamicResource ImageButtonTemplate}">
+                </my:HoverButton>
+                <my:HoverButton x:Name="_btnAK" Tag="Akuntansi" Content="AK" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ff00a200"/>
                     </Button.Resources>
-                </Button>
-                <Button x:Name="_btnMI" Tag="Manajemen Informatika" Content="MI" Template="{DynamicResource ImageButtonTemplate}">
+                </my:HoverButton>
+                <my:HoverButton x:Name="_btnMI" Tag="Manajemen Informatika" Content="MI" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ffd44928"/>
                     </Button.Resources>
-                </Button>
-                <Button x:Name="_btnKA" Tag="Komputerisasi Akuntansi" Content="KA" Template="{DynamicResource ImageButtonTemplate}">
+                </my:HoverButton>
+                <my:HoverButton x:Name="_btnKA" Tag="Komputerisasi Akuntansi" Content="KA" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ff5f3bb9"/>
                     </Button.Resources>
-                </Button>
+                </my:HoverButton>
             </UniformGrid> 
         </ScrollViewer>
     </DockPanel>

@@ -34,7 +34,6 @@ namespace Beginning.Kinect.Framework.Controls
             HoverButton button = (HoverButton)e.Source;
             textBox.Text = (String)button.Content;
         }
-       
-
+        
     }
 }
