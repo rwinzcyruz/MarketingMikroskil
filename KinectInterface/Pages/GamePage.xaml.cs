@@ -15,11 +15,11 @@ namespace KinectInterface.Pages
             var btn = (Button)e.OriginalSource;
             var win = (MainWindow)Window.GetWindow(this);
 
-            win.gamePage.Visibility = Visibility.Collapsed;
+            
             switch (btn.Name) 
             {
-                case "_btnQuiz": win.loginPage.Visibility = Visibility.Visible; break;
-                case "_btnPlay": win.ktypePage.Visibility = Visibility.Visible; break;
+                case "_btnQuiz": GameQuiz(); break;
+                case "_btnPlay": GameKtype(); break;
             }
         }
 
@@ -27,18 +27,16 @@ namespace KinectInterface.Pages
         {
             var win = (MainWindow)Window.GetWindow(this);
             win.gamePage.Visibility = Visibility.Collapsed;
-           // win.loginPage.Visibility = Visibility.Visible;
-            //ingat balikin
+            win.quizPage.Visibility = Visibility.Visible;
+            win.quizPage.CreateQuestion();
+            win.quizPage.QuizReset();
             win.changeState(states.GameQuiz);
-            win.loginPage.toGameQuiz();
         }
         public void GameKtype()
         {
             var win = (MainWindow)Window.GetWindow(this);
             win.gamePage.Visibility = Visibility.Collapsed;
-            
             win.ktypePage.Visibility = Visibility.Visible;
-
             win.changeState(states.GameKtype);
             win.ktypePage.Start();
         }

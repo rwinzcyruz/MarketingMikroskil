@@ -14,7 +14,7 @@ namespace KinectInterface.Pages
         private OleDbDataAdapter da;
         private DataSet ds;
         public bool done=false;
-        string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.Windows.Forms.Application.StartupPath + "\\Kinect.accdb";
+        string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + "..\\..\\Kinect.accdb";
         public QuizPage() {
             InitializeComponent();
             

@@ -16,7 +16,8 @@ namespace KinectInterface
         Profil = 2,
         Game = 3,
         GameQuiz = 4,
-        GameKtype = 5
+        GameKtype = 5,
+        Login = 6
     }
 
     public partial class MainWindow : MetroWindow
@@ -80,12 +81,12 @@ namespace KinectInterface
                 switch (this.state)
                 {
                     case states.Welcome:
-                        
+
                         homePage.Visibility = Visibility.Collapsed;
                         gamePage.Visibility = Visibility.Collapsed;
                         aboutUsPage.Visibility = Visibility.Collapsed;
-                        loginPage.Visibility = Visibility.Collapsed;
-                        quizPage.Visibility = Visibility.Collapsed;
+                        loginPage .Visibility = Visibility.Collapsed;
+                        quizPage .Visibility = Visibility.Collapsed;
                         ktypePage.Visibility = Visibility.Collapsed;
                         profilePage.Visibility = Visibility.Collapsed;
                         welcomePage.Visibility = Visibility.Visible;
@@ -95,29 +96,33 @@ namespace KinectInterface
                         break;
                        
                     case states.Home:
-                        showInstruction("home instruct");
+                       // showInstruction("home instruct");
                         homePage.Visibility = Visibility.Visible;
                         gamePage.Visibility = Visibility.Collapsed;
                         aboutUsPage.Visibility = Visibility.Collapsed;
-                        loginPage.Visibility = Visibility.Collapsed;
-                        quizPage.Visibility = Visibility.Collapsed;
+                        loginPage .Visibility = Visibility.Collapsed;
+                        quizPage .Visibility = Visibility.Collapsed;
                         ktypePage.Visibility = Visibility.Collapsed;
                         profilePage.Visibility = Visibility.Collapsed;
                         welcomePage.Visibility = Visibility.Collapsed;
+                        homePage.Visibility = Visibility.Visible;
                         SkeletonViewerElement.isShowHand = true;
                         break;
 
                     case states.Profil:
-                        showInstruction("profil instruct");
+                        //showInstruction("profil instruct");
+                        break;
+                    case states.Login :
+                        //showInstruction("login instruct");
                         break;
                     case states.Game:
-                        showInstruction("game instruct");
+                        //showInstruction("game instruct");
                         break;
                     case states.GameQuiz :
-                        showInstruction("gameQuiz instruct");
+                       // showInstruction("gameQuiz instruct");
                         break;
                     case states.GameKtype :
-                        showInstruction("ktype instruct");
+                       // showInstruction("ktype instruct");
                         SkeletonViewerElement.isShowHand = false ;
                         break;
                 }
@@ -468,11 +473,13 @@ namespace KinectInterface
             {
                 LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
                 homePage.Visibility = Visibility.Visible;
+                changeState(states.Home);
             }
             else if (e.Key == Key.End)
             {
                 LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
                 welcomePage.Visibility = Visibility.Visible;
+                changeState(states.Welcome);
             }
             else if (e.Key == Key.F1)
             {

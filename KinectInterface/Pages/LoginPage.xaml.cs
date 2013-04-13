@@ -8,7 +8,7 @@ namespace KinectInterface.Pages
     public partial class LoginPage : UserControl 
     {
 		//oledb
-        private string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + System.Windows.Forms.Application.StartupPath + "\\Kinect.accdb";
+        private string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + "..\\..\\Kinect.accdb";
         //odbc
         private string otherdbPath = "Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=" + System.Windows.Forms.Application.StartupPath + "\\Kinect.accdb";
         
@@ -31,20 +31,18 @@ namespace KinectInterface.Pages
                         cmd.ExecuteNonQuery();
                         txtNama.Text = "";
                         txtSekolah.Text = "";
-                        toGameQuiz();
+                        toGame();
                     }
                 }
             }
         }
 
-        public void toGameQuiz()
+        public void toGame()
         {
             var win = (MainWindow)Window.GetWindow(this);
             win.loginPage.Visibility = Visibility.Collapsed;
-            win.quizPage.Visibility = Visibility.Visible;
-            win.changeState(states.GameQuiz);
-            win.quizPage.CreateQuestion();
-            win.quizPage.QuizReset();
+            win.gamePage.Visibility = Visibility.Visible;
+            win.changeState(states.Game);            
         }
     }
 }

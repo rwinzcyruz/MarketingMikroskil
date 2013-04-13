@@ -15,11 +15,13 @@ namespace KinectInterface.Pages
             var btn = (Button)e.OriginalSource;
             var win = (MainWindow)Window.GetWindow(this);
 
-            win.homePage.Visibility = Visibility.Collapsed;
+            
             switch (btn.Name) 
             {
-                case "_btnProfile": win.profilePage.Visibility = Visibility.Visible; break;
-                case "_btnGame": win.gamePage.Visibility = Visibility.Visible; break;
+                case "_btnProfile": ProfileShow();
+                    break;
+                case "_btnGame": GameShow();
+                    break;
             }
         }
 
@@ -35,9 +37,12 @@ namespace KinectInterface.Pages
         {
             var win = (MainWindow)Window.GetWindow(this);
             win.homePage.Visibility = Visibility.Collapsed;
-            win.gamePage.Visibility = Visibility.Visible;
+            //ubah login ni
+            win.loginPage.Visibility = Visibility.Visible;
+            win.changeState(states.Login);
+            //win.gamePage.Visibility = Visibility.Visible;
+            //win.changeState(states.Game);
 
-            win.changeState(states.Game);
         }
     }
 }
