@@ -51,16 +51,19 @@
     </m:MetroWindow.Flyouts>
     
     <Viewbox>
-        <Grid x:Name="LayoutRoot" Background="{DynamicResource BackgroundPattern}">
-            <l:ProfileContentPage x:Name="profileContentPage" Visibility="Collapsed"/>
-            <l:AboutUsPage x:Name="aboutUsPage" Visibility="Collapsed"/>
-            <l:LoginPage x:Name="loginPage" Visibility="Collapsed"/>
-			<l:KtypePage x:Name="ktypePage" Visibility="Collapsed"/>
-            <l:GamePage x:Name="gamePage" Visibility="Collapsed"/>
-            <l:QuizPage x:Name="quizPage" Visibility="Collapsed"/>
-            <l:ProfilePage x:Name="profilePage" Visibility="Collapsed"/>
-            <l:HomePage x:Name="homePage" Visibility="Collapsed"/>
-            <l:WelcomePage x:Name="welcomePage"/>
+        <Grid Background="{DynamicResource BackgroundPattern}">
+            <Grid x:Name="_layoutRoot">
+                <l:ProfileContentPage x:Name="_profileContentPage" Visibility="Collapsed"/>
+                <l:AboutUsPage x:Name="_aboutUsPage" Visibility="Collapsed"/>
+                <l:LoginPage x:Name="_loginPage" Visibility="Collapsed"/>
+                <l:KtypePage x:Name="_ktypePage" Visibility="Collapsed"/>
+                <l:GamePage x:Name="_gamePage" Visibility="Collapsed"/>
+                <l:QuizPage x:Name="_quizPage" Visibility="Collapsed"/>
+                <l:ProfilePage x:Name="_profilePage" Visibility="Collapsed"/>
+                <l:HomePage x:Name="_homePage" Visibility="Collapsed"/>
+                <l:WelcomePage x:Name="_welcomePage"/>
+            </Grid>
+            <l:InstructionPage x:Name="_instructionPage" Visibility="Collapsed"/>
 			<my:SkeletonViewer x:Name="SkeletonViewerElement" BorderBrush="Red" BorderThickness="0"/>
         </Grid>
     </Viewbox>

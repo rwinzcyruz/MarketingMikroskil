@@ -30,7 +30,6 @@ namespace KinectInterface
         private Pose Tpose;
         private readonly Recognizer actRecognizer;
         private states state;
-        private Instruction instruction;
         private DispatcherTimer instructionTimer;
         private int instructionSecond = 3;
         //instruction disabling
@@ -46,11 +45,10 @@ namespace KinectInterface
             state = states.Welcome;
 
             //timer for instruction
-            instruction = new Instruction();
             kinectDisable = false;
             instructionTimer = new DispatcherTimer();
             instructionTimer.Tick += new EventHandler(this.instrucTime);
-            instructionTimer.Interval = new TimeSpan(0, 0, instructionSecond );
+            instructionTimer.Interval = new TimeSpan(0, 0, instructionSecond);
 
             //hide cursor
             this.Cursor = Cursors.None;
@@ -59,18 +57,19 @@ namespace KinectInterface
         //show instruction
         public void showInstruction(string comment)
         {
-            instruction.txtA.Text = comment;
-            instruction.Show();
+            _instructionPage.Message.Text = comment;
+            _instructionPage.Visibility = Visibility.Visible;
+            _instructionPage.ProgressRing.IsActive = true;
             instructionTimer.Start();
-            kinectDisable = true;   
+            kinectDisable = true;
         }
         //instruc event
         public void instrucTime(object sender, EventArgs e)
         {
             instructionTimer.Stop();
             kinectDisable = false;
-            instruction.Hide();
-            
+            _instructionPage.Visibility = Visibility.Collapsed;
+            _instructionPage.ProgressRing.IsActive = false;
         }
         //semua state
         public void changeState(states newState)
@@ -81,48 +80,34 @@ namespace KinectInterface
                 switch (this.state)
                 {
                     case states.Welcome:
-
-                        homePage.Visibility = Visibility.Collapsed;
-                        gamePage.Visibility = Visibility.Collapsed;
-                        aboutUsPage.Visibility = Visibility.Collapsed;
-                        loginPage .Visibility = Visibility.Collapsed;
-                        quizPage .Visibility = Visibility.Collapsed;
-                        ktypePage.Visibility = Visibility.Collapsed;
-                        profilePage.Visibility = Visibility.Collapsed;
-                        welcomePage.Visibility = Visibility.Visible;
+                        _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                        _welcomePage.Visibility = Visibility.Visible;
                         SkeletonViewerElement.isShowHand = false;
                         SkeletonViewerElement.Margin = new Thickness(254, 6, 182, 11);
                         SkeletonViewerElement.BorderThickness = new Thickness(0);
                         break;
                        
                     case states.Home:
-                       // showInstruction("home instruct");
-                        homePage.Visibility = Visibility.Visible;
-                        gamePage.Visibility = Visibility.Collapsed;
-                        aboutUsPage.Visibility = Visibility.Collapsed;
-                        loginPage .Visibility = Visibility.Collapsed;
-                        quizPage .Visibility = Visibility.Collapsed;
-                        ktypePage.Visibility = Visibility.Collapsed;
-                        profilePage.Visibility = Visibility.Collapsed;
-                        welcomePage.Visibility = Visibility.Collapsed;
-                        homePage.Visibility = Visibility.Visible;
+                        showInstruction("/sapukan tangan anda dari kiri ke kanan atau sebaliknya/");
+                        _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                        _homePage.Visibility = Visibility.Visible;
                         SkeletonViewerElement.isShowHand = true;
                         break;
 
                     case states.Profil:
-                        //showInstruction("profil instruct");
+                        showInstruction("/pilih dan tahan tangan anda untuk memilih/");
                         break;
                     case states.Login :
-                        //showInstruction("login instruct");
+                        //showInstruction("login instruction");
                         break;
                     case states.Game:
-                        //showInstruction("game instruct");
+                        //showInstruction("game instruction");
                         break;
                     case states.GameQuiz :
-                       // showInstruction("gameQuiz instruct");
+                        //showInstruction("gameQuiz instruction");
                         break;
                     case states.GameKtype :
-                       // showInstruction("ktype instruct");
+                        //showInstruction("ktype instruction");
                         SkeletonViewerElement.isShowHand = false ;
                         break;
                 }
@@ -174,7 +159,7 @@ namespace KinectInterface
                             SkeletonViewerElement.IsEnabled = false;
                             SkeletonViewerElement.Margin = new Thickness(0, 0, 0, 0);
 
-                            welcomePage.T_Pose(null, null);
+                            _welcomePage.T_Pose(null, null);
                             changeState(states.Home);
                             
                         }
@@ -186,8 +171,8 @@ namespace KinectInterface
                         }
                         else if (state == states.GameQuiz)
                         {
-                            IInputElement leftTarget = GetHitTarget(skeleton.Joints[JointType.HandLeft], quizPage.QuizGrid);
-                            IInputElement rightTarget = GetHitTarget(skeleton.Joints[JointType.HandRight], quizPage.QuizGrid);
+                            IInputElement leftTarget = GetHitTarget(skeleton.Joints[JointType.HandLeft], _quizPage.QuizGrid);
+                            IInputElement rightTarget = GetHitTarget(skeleton.Joints[JointType.HandRight], _quizPage.QuizGrid);
                             bool hasTargetChange = (leftTarget != this.LeftQuizTarget) || (rightTarget != this.RightQuizTarget);
                             if (hasTargetChange)
                             {
@@ -197,10 +182,10 @@ namespace KinectInterface
                                     {
                                         
                                     }
-                                    else if ((LeftQuizTarget == quizPage.QuizGrid.Children[z] && RightQuizTarget == null) ||
-                                            (RightQuizTarget == quizPage.QuizGrid.Children[z] && LeftQuizTarget == null))
+                                    else if ((LeftQuizTarget == _quizPage.QuizGrid.Children[z] && RightQuizTarget == null) ||
+                                            (RightQuizTarget == _quizPage.QuizGrid.Children[z] && LeftQuizTarget == null))
                                     {                                       
-                                        quizPage.AnswerIs(z+1);
+                                        _quizPage.AnswerIs(z+1);
                                         break;
                                     }
                                     else if (leftTarget != null || rightTarget != null)
@@ -280,8 +265,8 @@ namespace KinectInterface
         }
         private double GetJointAngle(Joint centerJoint, Joint angleJoint)
         {
-            Point primaryPoint = GetJointPoint(this.KinectDevice, centerJoint, this.LayoutRoot.RenderSize, new Point());
-            Point anglePoint = GetJointPoint(this.KinectDevice, angleJoint, this.LayoutRoot.RenderSize, new Point());
+            Point primaryPoint = GetJointPoint(this.KinectDevice, centerJoint, this._layoutRoot.RenderSize, new Point());
+            Point anglePoint = GetJointPoint(this.KinectDevice, angleJoint, this._layoutRoot.RenderSize, new Point());
             Point x = new Point(primaryPoint.X + anglePoint.X, primaryPoint.Y);
 
             double a;
@@ -403,17 +388,17 @@ namespace KinectInterface
             // Wire-up swipe right to manually advance picture.
             recognizer.SwipeRightDetected += (s, e) =>
             {
-                if (state == states.Home) homePage.GameShow();
+                if (state == states.Home) _homePage.GameShow();
                 //else if (state == states.Profil) profilePage.Right_Swipe(null, null);
-                else if (state == states.Game) gamePage.GameKtype();
+                else if (state == states.Game) _gamePage.GameKtype();
             };
 
             // Wire-up swipe left to manually reverse picture.
             recognizer.SwipeLeftDetected += (s, e) =>
             {
-                if (state == states.Home) homePage.ProfileShow();
+                if (state == states.Home) _homePage.ProfileShow();
                 //else if (state == states.Profil) profilePage.Left_Swipe(null, null);
-                else if (state == states.Game) gamePage.GameQuiz();
+                else if (state == states.Game) _gamePage.GameQuiz();
             };
 
             return recognizer;
@@ -427,7 +412,7 @@ namespace KinectInterface
         }
         private IInputElement GetHitTarget(Joint joint, UIElement target)
         {
-            Point targetPoint = LayoutRoot.TranslatePoint(GetJointPoint(this.KinectDevice, joint, LayoutRoot.RenderSize, new Point()), target);
+            Point targetPoint = _layoutRoot.TranslatePoint(GetJointPoint(this.KinectDevice, joint, _layoutRoot.RenderSize, new Point()), target);
             return target.InputHitTest(targetPoint);
         }
 
@@ -471,20 +456,20 @@ namespace KinectInterface
         {
             if (e.Key == Key.Home)
             {
-                LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                homePage.Visibility = Visibility.Visible;
+                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                _homePage.Visibility = Visibility.Visible;
                 changeState(states.Home);
             }
             else if (e.Key == Key.End)
             {
-                LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                welcomePage.Visibility = Visibility.Visible;
+                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                _welcomePage.Visibility = Visibility.Visible;
                 changeState(states.Welcome);
             }
             else if (e.Key == Key.F1)
             {
-                LayoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                aboutUsPage.Visibility = Visibility.Visible;
+                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                _aboutUsPage.Visibility = Visibility.Visible;
             }
             else if (e.Key == Key.Space)
             {

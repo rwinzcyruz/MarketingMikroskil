@@ -18,7 +18,8 @@
         
         <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">        
             <UniformGrid x:Name="ProfileGrid" Columns="6" Width="3228" Margin="90,30,60,0" Focusable="True" Button.Click="Navigate_Click">
-                <my:HoverButton  x:Name="_btnTI" Tag="Teknik Informatika" Content="TI" Template="{DynamicResource ImageButtonTemplate}">
+                <!--comment out block di bawah ini jika tanpa kinect-->
+                <!--<my:HoverButton x:Name="_btnTI" Tag="Teknik Informatika" Content="TI" Template="{DynamicResource ImageButtonTemplate}">
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ffbc1c48"/>
                     </Button.Resources>
@@ -47,7 +48,8 @@
                     <Button.Resources>
                         <SolidColorBrush x:Key="_hover" Color="#ff5f3bb9"/>
                     </Button.Resources>
-                </my:HoverButton>
+                </my:HoverButton>-->
+                <!--end block-->
             </UniformGrid> 
         </ScrollViewer>
     </DockPanel>

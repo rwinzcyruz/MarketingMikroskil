@@ -76,10 +76,10 @@ namespace KinectInterface.Pages
             if (abc[5] == max) result += "MB\n";
             
             MainWindow win = (MainWindow)Window.GetWindow(this);
-            win.quizPage.Visibility = Visibility.Collapsed;
-            win.homePage.Visibility = Visibility.Visible;
+            win._quizPage.Visibility = Visibility.Collapsed;
+            win._homePage.Visibility = Visibility.Visible;
             win.changeState(states.Home);
-            win.homePage.txtJurusan.Text = result;
+            win._homePage.txtJurusan.Text = result;
         }
 
         public  void QuizReset()

@@ -40,8 +40,8 @@ namespace KinectInterface.Pages
                 else
                 {
                     var win = (MainWindow)Window.GetWindow(this);
-                    win.profileContentPage.Visibility = Visibility.Collapsed;
-                    win.profilePage.Visibility = Visibility.Visible;
+                    win._profileContentPage.Visibility = Visibility.Collapsed;
+                    win._profilePage.Visibility = Visibility.Visible;
                 }
             }
             else if (e.Key == Key.Right)
@@ -54,8 +54,8 @@ namespace KinectInterface.Pages
                 else
                 {
                     var win = (MainWindow)Window.GetWindow(this);
-                    win.profileContentPage.Visibility = Visibility.Collapsed;
-                    win.profilePage.Visibility = Visibility.Visible;
+                    win._profileContentPage.Visibility = Visibility.Collapsed;
+                    win._profilePage.Visibility = Visibility.Visible;
                 }
             }
             e.Handled = true;

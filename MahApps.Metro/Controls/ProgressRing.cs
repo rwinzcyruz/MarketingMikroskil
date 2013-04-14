@@ -97,14 +97,14 @@ namespace MahApps.Metro.Controls
 
         private void SetMaxSideLength(double width)
         {
-            MaxSideLength = width <= 60 ? 60.0 : width;
+            MaxSideLength = width <= 120 ? 120.0 : width;
         }
 
         private void SetEllipseDiameter(double width)
         {
-            if (width <= 60)
+            if (width <= 120)
             {
-                EllipseDiameter = 6.0;
+                EllipseDiameter = 12.0;
             }
             else
             {
@@ -115,13 +115,13 @@ namespace MahApps.Metro.Controls
 
         private void SetEllipseOffset(double width)
         {
-            if (width <= 60)
+            if (width <= 120)
             {
-                EllipseOffset = new Thickness(0, 24, 0, 0);
+                EllipseOffset = new Thickness(0, 48, 0, 0);
             }
             else
             {
-                EllipseOffset = new Thickness(0, width * 0.4 + 24, 0, 0);
+                EllipseOffset = new Thickness(0, width * 0.4 + 48, 0, 0);
             }
         }
 
@@ -200,7 +200,7 @@ namespace MahApps.Metro.Controls
             if (value is double)
             {
                 var width = (double)value;
-                return width <= 60 ? 60.0 : width;
+                return width <= 120 ? 120.0 : width;
             }
 
             return null;

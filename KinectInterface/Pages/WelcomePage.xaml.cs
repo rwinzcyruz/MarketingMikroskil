@@ -12,8 +12,8 @@ namespace KinectInterface.Pages
 
         public void T_Pose(object sender, RoutedEventArgs e) {
             MainWindow win = (MainWindow)Window.GetWindow(this);
-            win.welcomePage.Visibility = Visibility.Collapsed;
-            win.homePage.Visibility = Visibility.Visible;
+            win._welcomePage.Visibility = Visibility.Collapsed;
+            win._homePage.Visibility = Visibility.Visible;
         }
     }
 }

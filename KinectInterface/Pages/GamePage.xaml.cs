@@ -26,19 +26,19 @@ namespace KinectInterface.Pages
 		public void GameQuiz()
         {
             var win = (MainWindow)Window.GetWindow(this);
-            win.gamePage.Visibility = Visibility.Collapsed;
-            win.quizPage.Visibility = Visibility.Visible;
-            win.quizPage.CreateQuestion();
-            win.quizPage.QuizReset();
+            win._gamePage.Visibility = Visibility.Collapsed;
+            win._quizPage.Visibility = Visibility.Visible;
+            win._quizPage.CreateQuestion();
+            win._quizPage.QuizReset();
             win.changeState(states.GameQuiz);
         }
         public void GameKtype()
         {
             var win = (MainWindow)Window.GetWindow(this);
-            win.gamePage.Visibility = Visibility.Collapsed;
-            win.ktypePage.Visibility = Visibility.Visible;
+            win._gamePage.Visibility = Visibility.Collapsed;
+            win._ktypePage.Visibility = Visibility.Visible;
             win.changeState(states.GameKtype);
-            win.ktypePage.Start();
+            win._ktypePage.Start();
         }
     }
 }

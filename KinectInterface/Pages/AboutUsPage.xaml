@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         	 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:c="clr-namespace:KinectInterface.Controls"
         	 xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
         	 mc:Ignorable="d" 
         	 d:DesignWidth="1920" d:DesignHeight="1080"
@@ -17,33 +18,21 @@
         </Label>
 
         <UniformGrid Rows="2" Columns="2" Margin="80,80,0,0">
-            <DockPanel Grid.Row="0" Grid.Column="0" Margin="0,0,80,80">
-                <Image DockPanel.Dock="Left" Source="/KinectInterface;component/Images/placeholder_person.gif" />
-                <StackPanel Margin="20, 0">
-                    <TextBlock FontSize="{DynamicResource NormalFontSize}">Andy Wijaya</TextBlock>
-                    <TextBlock FontSize="{DynamicResource ContentFontSize}">Description</TextBlock>
-                </StackPanel>
+            <DockPanel Margin="0,0,80,80">
+                <Image DockPanel.Dock="Left" Source="/KinectInterface;component/Images/placeholder_person.gif"/>
+                <c:Pane Label="Andy Wiyaya" Value="Description" Margin="20,0" FontSize="{DynamicResource NormalFontSize}"/>
             </DockPanel>
-            <DockPanel Grid.Row="0" Grid.Column="1" Margin="0,0,80,80">
-                <Image DockPanel.Dock="Right" Source="/KinectInterface;component/Images/placeholder_person.gif" />
-                <StackPanel Margin="20, 0">
-                    <TextBlock FontSize="{DynamicResource NormalFontSize}" HorizontalAlignment="Right">Erwin</TextBlock>
-                    <TextBlock FontSize="{DynamicResource ContentFontSize}" HorizontalAlignment="Right">Description</TextBlock>
-                </StackPanel>
+            <DockPanel Margin="0,0,80,80">
+                <Image DockPanel.Dock="Right" Source="/KinectInterface;component/Images/placeholder_person.gif"/>
+                <c:Pane Label="Erwin" Value="Description" TextBlock.TextAlignment="Right" Margin="20,0" FontSize="{DynamicResource NormalFontSize}"/>
             </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="0" Margin="0,0,80,80">
-                <Image DockPanel.Dock="Left" Source="/KinectInterface;component/Images/placeholder_person.gif" />
-                <StackPanel Margin="20, 0">
-                    <TextBlock FontSize="{DynamicResource NormalFontSize}">Piko Hendra</TextBlock>
-                    <TextBlock FontSize="{DynamicResource ContentFontSize}">Description</TextBlock>
-                </StackPanel>
+            <DockPanel Margin="0,0,80,80">
+                <Image DockPanel.Dock="Left" Source="/KinectInterface;component/Images/placeholder_person.gif"/>
+                <c:Pane Label="Piko Hendra" Value="Description" Margin="20,0" FontSize="{DynamicResource NormalFontSize}"/>
             </DockPanel>
-            <DockPanel Grid.Row="1" Grid.Column="1" Margin="0,0,80,80">
-                <Image DockPanel.Dock="Right" Source="/KinectInterface;component/Images/placeholder_person.gif" />
-                <StackPanel Margin="20, 0">
-                    <TextBlock FontSize="{DynamicResource NormalFontSize}" HorizontalAlignment="Right">Viviani Sunaryo</TextBlock>
-                    <TextBlock FontSize="{DynamicResource ContentFontSize}" HorizontalAlignment="Right">Description</TextBlock>
-                </StackPanel>
+            <DockPanel Margin="0,0,80,80">
+                <Image DockPanel.Dock="Right" Source="/KinectInterface;component/Images/placeholder_person.gif"/>
+                <c:Pane Label="Viviani Sunaryo" Value="Description" TextBlock.TextAlignment="Right" Margin="20,0" FontSize="{DynamicResource NormalFontSize}"/>
             </DockPanel>
         </UniformGrid>
     </DockPanel>

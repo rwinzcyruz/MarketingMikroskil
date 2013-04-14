@@ -19,8 +19,8 @@ namespace KinectInterface.Pages
         {
             var btn = (Button)e.OriginalSource;
             var win = (MainWindow)Window.GetWindow(this);
-            win.profilePage.Visibility = Visibility.Collapsed;
-            win.profileContentPage.Visibility = Visibility.Visible;
+            win._profilePage.Visibility = Visibility.Collapsed;
+            win._profileContentPage.Visibility = Visibility.Visible;
 
             int size = 0;
             switch (btn.Content.ToString())
@@ -32,8 +32,8 @@ namespace KinectInterface.Pages
                 case "MI": size = 2; break;
                 case "KA": size = 2; break;
             }
-            win.profileContentPage.MainContent.Children.Clear();
-            win.profileContentPage.State = 0;
+            win._profileContentPage.MainContent.Children.Clear();
+            win._profileContentPage.State = 0;
             Generate(btn.Content.ToString(), size, btn.Tag.ToString());
 
         }
@@ -50,8 +50,8 @@ namespace KinectInterface.Pages
 
                 if (i != 1) img.Visibility = Visibility.Collapsed;
 
-                win.profileContentPage.TitleText.Content = content;
-                win.profileContentPage.MainContent.Children.Add(img);
+                win._profileContentPage.TitleText.Content = content;
+                win._profileContentPage.MainContent.Children.Add(img);
             }
         }
 

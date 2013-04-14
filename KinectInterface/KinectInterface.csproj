@@ -64,6 +64,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -86,14 +87,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Instruction.xaml.cs">
-      <DependentUpon>Instruction.xaml</DependentUpon>
+    <Compile Include="Controls\Pane.xaml.cs">
+      <DependentUpon>Pane.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\WidthConverter.cs" />
     <Compile Include="Model\SkeletonViewer.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>SkeletonViewer.xaml</DependentUpon>
     </Compile>
-    <Page Include="Instruction.xaml">
+    <Page Include="Controls\Pane.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\InstructionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -166,6 +172,9 @@
     <Compile Include="Pages\HomePage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InstructionPage.xaml.cs">
+      <DependentUpon>InstructionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\KtypePage.xaml.cs">
       <DependentUpon>KtypePage.xaml</DependentUpon>

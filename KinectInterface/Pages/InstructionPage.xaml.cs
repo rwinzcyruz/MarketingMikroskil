@@ -12,21 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-namespace KinectInterface
+
+namespace KinectInterface.Pages
 {
-    /// <summary>
-    /// Interaction logic for Instruction.xaml
-    /// </summary>
-    public partial class Instruction : Window
+    public partial class InstructionPage : UserControl
     {
         private DispatcherTimer idleTimer;
-        public Instruction()
+        
+        public InstructionPage()
         {
             InitializeComponent();
             //idleTimer = new DispatcherTimer();
             //idleTimer.Tick += new EventHandler(this.idleTime);
             //idleTimer.Interval = new TimeSpan(0, 0, 3);
         }
+        
         //public void idleTime(object sender, EventArgs e)
         //{
         //    idleTimer.Stop();

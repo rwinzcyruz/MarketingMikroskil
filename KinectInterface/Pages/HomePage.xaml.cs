@@ -28,17 +28,17 @@ namespace KinectInterface.Pages
 		public void ProfileShow()
         {
             var win = (MainWindow)Window.GetWindow(this);
-            win.homePage.Visibility = Visibility.Collapsed;
-            win.profilePage.Visibility = Visibility.Visible;
+            win._homePage.Visibility = Visibility.Collapsed;
+            win._profilePage.Visibility = Visibility.Visible;
 
             win.changeState(states.Profil);
         }
         public void GameShow()
         {
             var win = (MainWindow)Window.GetWindow(this);
-            win.homePage.Visibility = Visibility.Collapsed;
+            win._homePage.Visibility = Visibility.Collapsed;
             //ubah login ni
-            win.loginPage.Visibility = Visibility.Visible;
+            win._loginPage.Visibility = Visibility.Visible;
             win.changeState(states.Login);
             //win.gamePage.Visibility = Visibility.Visible;
             //win.changeState(states.Game);
