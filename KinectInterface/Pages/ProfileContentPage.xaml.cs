@@ -60,5 +60,35 @@ namespace KinectInterface.Pages
             }
             e.Handled = true;
         }
+        public void NextContent()
+        {
+            if (State > 0)
+            {
+                MainContent.Children[State].Visibility = Visibility.Collapsed;
+                MainContent.Children[--State].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                var win = (MainWindow)Window.GetWindow(this);
+                win._profileContentPage.Visibility = Visibility.Collapsed;
+                win._profilePage.Visibility = Visibility.Visible;
+            }
+
+        }
+
+        public void PreviousContent()
+        {
+            if (State < MainContent.Children.Count - 1)
+            {
+                MainContent.Children[State].Visibility = Visibility.Collapsed;
+                MainContent.Children[++State].Visibility = Visibility.Visible;
+            }
+            else
+            {
+                var win = (MainWindow)Window.GetWindow(this);
+                win._profileContentPage.Visibility = Visibility.Collapsed;
+                win._profilePage.Visibility = Visibility.Visible;
+            }
+        }
     }
 }

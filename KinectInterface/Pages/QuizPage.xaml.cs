@@ -34,7 +34,7 @@ namespace KinectInterface.Pages
             txtQuestion.Text = ds.Tables["soal"].Rows[no][0].ToString();
             for (int z = 0; z < 6; z++)
             {   
-                jawaban = ds.Tables["soal"].Rows[no][z].ToString().Split('|');
+                jawaban = ds.Tables["soal"].Rows[no][z+1].ToString().Split('|');
                 ((TextBlock)QuizGrid.Children[z]).Text = jawaban[0];
             }
 
@@ -77,8 +77,8 @@ namespace KinectInterface.Pages
             
             MainWindow win = (MainWindow)Window.GetWindow(this);
             win._quizPage.Visibility = Visibility.Collapsed;
-            win._homePage.Visibility = Visibility.Visible;
-            win.changeState(states.Home);
+            win._gamePage .Visibility = Visibility.Visible;
+            win.changeState(states.Game );
             win._homePage.txtJurusan.Text = result;
         }
 

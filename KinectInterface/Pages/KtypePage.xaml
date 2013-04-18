@@ -24,7 +24,7 @@
             </Label.Resources>
         </Label>
 
-        <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom">
             <UniformGrid DockPanel.Dock="Bottom" Columns="5"
                          TextBlock.FontSize="{DynamicResource HeaderFontSize}" TextBlock.TextAlignment="Center" d:IsHidden="True">
                 <c:Pane x:Name="_scorePane" Label="skor" Value="0"/>
@@ -34,22 +34,22 @@
                 <c:Pane x:Name="_timePane" Label="waktu" Value="0"/>
             </UniformGrid>
             <!--comment out satu baris di bawah ini jika tanpa kinect-->
-            <!--<my:Keyboard Name="keyboard"/>-->
-            <ListView x:Name="_scoreboard" TextBlock.FontSize="{DynamicResource SubHeaderFontSize}"
+            <my:Keyboard Name="keyboard"/>
+        </DockPanel>
+        
+        <ListView DockPanel.Dock="Bottom" Visibility="Collapsed" x:Name="_scoreboard" TextBlock.FontSize="{DynamicResource SubHeaderFontSize}"
                       TextBlock.FontWeight="Light"
                       ItemsSource="{Binding Rank}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="posisi" DisplayMemberBinding="{Binding Position}"
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="posisi" DisplayMemberBinding="{Binding Position}"
                                         Width="381"/>
-                        <GridViewColumn Header="nama" DisplayMemberBinding="{Binding Name}"
+                    <GridViewColumn Header="nama" DisplayMemberBinding="{Binding Name}"
                                         Width="958"/>
-                        <GridViewColumn Header="skor" DisplayMemberBinding="{Binding Score}"
+                    <GridViewColumn Header="skor" DisplayMemberBinding="{Binding Score}"
                                         Width="574"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </DockPanel>
-
+                </GridView>
+            </ListView.View>
+        </ListView>
     </DockPanel>
 </UserControl>

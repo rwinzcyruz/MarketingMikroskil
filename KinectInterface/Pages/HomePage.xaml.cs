@@ -38,10 +38,10 @@ namespace KinectInterface.Pages
             var win = (MainWindow)Window.GetWindow(this);
             win._homePage.Visibility = Visibility.Collapsed;
             //ubah login ni
-            win._loginPage.Visibility = Visibility.Visible;
-            win.changeState(states.Login);
-            //win.gamePage.Visibility = Visibility.Visible;
-            //win.changeState(states.Game);
+            //win._loginPage.Visibility = Visibility.Visible;
+            //win.changeState(states.Login);
+            win._gamePage.Visibility = Visibility.Visible;
+            win.changeState(states.Game);
 
         }
     }

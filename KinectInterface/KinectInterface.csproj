@@ -278,6 +278,9 @@
     <Resource Include="Images\TI %281%29.png" />
     <Resource Include="Images\TI %282%29.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Kinect.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterResolveReferences">
     <ItemGroup>

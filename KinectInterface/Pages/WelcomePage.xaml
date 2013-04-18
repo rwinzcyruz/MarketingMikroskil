@@ -9,7 +9,7 @@
              Width="1920" Height="1080">
     
     <UniformGrid Rows="3">
-        <TextBlock Text="&lt;/selamat datang/&gt;" FontSize="{DynamicResource TitleFontSize}" FontWeight="Light" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock Text="&lt;/selamat datang/&gt;" FontSize="{DynamicResource TitleFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Viewbox Width="300" Height="200">
             <Canvas Width="300" Height="200" Background="{StaticResource MikroskilLogo}"/>
         </Viewbox>

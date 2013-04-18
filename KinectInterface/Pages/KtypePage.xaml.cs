@@ -4,6 +4,8 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Data.OleDb;
+using System.Data;
 namespace KinectInterface.Pages
 {
     public class Rank
@@ -24,26 +26,28 @@ namespace KinectInterface.Pages
     {
         private int live;
         private int score;
-        private string hrf;
+        private string hrf="";
         private int time;
         private DispatcherTimer idleTimer;
 
         ObservableCollection<Rank> rank = new ObservableCollection<Rank>();
         public ObservableCollection<Rank> Rank { get { return rank; } }
 
+        //db path
+        private string dbPath = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + "..\\..\\Kinect.accdb";
+        private OleDbDataAdapter da;
+        private DataSet ds;
+        //db thing
+
         public KtypePage()
         {
-            //ini data akan masuk ke list view, @piko: buat biar bisa generate dari database dengan looping
-            rank.Add(new Rank(1, "Erwin", 1000));
-            rank.Add(new Rank(2, "David", 700));
-
             InitializeComponent();
             ToogleScoreBoard();
             idleTimer = new DispatcherTimer();
             idleTimer.Tick += new EventHandler(this.idleTime);
             idleTimer.Interval = new TimeSpan(0, 0, 1);
             //comment out jika tanpa kinect
-            //this.keyboard.setBlock(txtPenampung);
+            this.keyboard.setBlock(txtPenampung);
         }
 
         public void idleTime(object sender, EventArgs e)
@@ -99,11 +103,14 @@ namespace KinectInterface.Pages
         {
             idleTimer.Stop();
             ToogleScoreBoard();
-            
-            //var win = (MainWindow)Window.GetWindow(this);
-            //win.ktypePage.Visibility = Visibility.Collapsed;
-            //win._homePage.Visibility = Visibility.Visible;
-            //win.changeState(states.Home );
+            //testing db score
+            InsertScoreBoard(score);
+            ShowScoreBoard();
+            //
+            var win = (MainWindow)Window.GetWindow(this);
+            win._ktypePage.Visibility = Visibility.Collapsed;
+            win._gamePage.Visibility = Visibility.Visible;
+            win.changeState(states.Game );
         }
 
         public String hurufAcak(int length)
@@ -115,7 +122,8 @@ namespace KinectInterface.Pages
             {
                 result.Append(characters[random.Next(characters.Length)]);
             }
-            return result.ToString();
+            if (hrf.Equals(result.ToString())) return hurufAcak(1);
+            else return result.ToString();
         }
 
         public void ToogleScoreBoard()
@@ -123,7 +131,60 @@ namespace KinectInterface.Pages
             if (_scoreboard.Visibility == Visibility.Visible)
                 _scoreboard.Visibility = Visibility.Collapsed;
             else
+            {
                 _scoreboard.Visibility = Visibility.Visible;
+            }
         }
+
+        public void ShowScoreBoard()
+        {
+            using (OleDbConnection con = new OleDbConnection(dbPath))
+            {
+                con.Open();
+
+                string sql = "select top 5 * from score order by score desc";
+
+                using (OleDbCommand cmd = new OleDbCommand(sql, con))
+                {   
+                    da = new OleDbDataAdapter(sql, con );
+                    ds = new DataSet();
+                    da.Fill(ds, "score");
+                }
+            }
+
+            rank.Clear();
+            string nama;
+            int score;
+            for (int z = 0; z < ds.Tables["score"].Rows.Count - 1; z++)
+            {
+                nama = ds.Tables["score"].Rows[z][0].ToString();
+                score = Convert .ToInt32(ds.Tables["score"].Rows[z][1]);
+                rank.Add(new Rank(z + 1, nama , score));
+            }
+
+        }
+
+        public void InsertScoreBoard(int score)
+        {
+            string nama,sql;
+            using (OleDbConnection con = new OleDbConnection(dbPath))
+            {
+                con.Open();
+
+                sql = "select top 1 nama from KinectUser order by no desc";
+                using (OleDbCommand cmd = new OleDbCommand(sql, con))
+                {
+                    nama = (string)cmd.ExecuteScalar();
+                }
+
+                sql = "insert into score values('" + nama + "','" + score + "')";
+
+                using (OleDbCommand cmd = new OleDbCommand(sql, con))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

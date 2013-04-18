@@ -17,7 +17,8 @@ namespace KinectInterface
         Game = 3,
         GameQuiz = 4,
         GameKtype = 5,
-        Login = 6
+        Login = 6,
+        ProfilContent = 7
     }
 
     public partial class MainWindow : MetroWindow
@@ -31,7 +32,9 @@ namespace KinectInterface
         private readonly Recognizer actRecognizer;
         private states state;
         private DispatcherTimer instructionTimer;
+        private DispatcherTimer quizTimer;
         private int instructionSecond = 3;
+        private int quizSecond = 3;
         //instruction disabling
         private bool kinectDisable;
         public MainWindow() {
@@ -50,6 +53,10 @@ namespace KinectInterface
             instructionTimer.Tick += new EventHandler(this.instrucTime);
             instructionTimer.Interval = new TimeSpan(0, 0, instructionSecond);
 
+            //time for quiz waiting
+            quizTimer = new DispatcherTimer();
+            quizTimer.Tick += new EventHandler(this.quizTime);
+            quizTimer.Interval = new TimeSpan(0, 0, quizSecond );
             //hide cursor
             this.Cursor = Cursors.None;
         }
@@ -70,6 +77,18 @@ namespace KinectInterface
             kinectDisable = false;
             _instructionPage.Visibility = Visibility.Collapsed;
             _instructionPage.ProgressRing.IsActive = false;
+        }
+
+        //timer quiz
+        public void stopQuiz()
+        {
+            quizTimer.Start();
+            kinectDisable = true;
+        }
+        public void quizTime(object sender, EventArgs e)
+        {
+            quizTimer.Stop();
+            kinectDisable = false;
         }
         //semua state
         public void changeState(states newState)
@@ -101,7 +120,7 @@ namespace KinectInterface
                         //showInstruction("login instruction");
                         break;
                     case states.Game:
-                        //showInstruction("game instruction");
+                        showInstruction("game instruction");
                         break;
                     case states.GameQuiz :
                         //showInstruction("gameQuiz instruction");
@@ -109,6 +128,9 @@ namespace KinectInterface
                     case states.GameKtype :
                         //showInstruction("ktype instruction");
                         SkeletonViewerElement.isShowHand = false ;
+                        break;
+                    case states .ProfilContent :
+                        
                         break;
                 }
             }
@@ -158,9 +180,18 @@ namespace KinectInterface
                             //hide skeleton to view                           
                             SkeletonViewerElement.IsEnabled = false;
                             SkeletonViewerElement.Margin = new Thickness(0, 0, 0, 0);
-
-                            _welcomePage.T_Pose(null, null);
-                            changeState(states.Home);
+                            if (state == states.GameKtype || state == states.GameQuiz)
+                            {
+                                _quizPage.Visibility = Visibility.Collapsed;
+                                _ktypePage.Visibility = Visibility.Collapsed;
+                                _gamePage.Visibility = Visibility.Visible;
+                                changeState(states.Game );
+                            }
+                            else
+                            {
+                                _welcomePage.T_Pose(null, null);
+                                changeState(states.Home);
+                            }
                             
                         }
                         else if(state == states .Welcome )
@@ -186,6 +217,7 @@ namespace KinectInterface
                                             (RightQuizTarget == _quizPage.QuizGrid.Children[z] && LeftQuizTarget == null))
                                     {                                       
                                         _quizPage.AnswerIs(z+1);
+                                        stopQuiz();
                                         break;
                                     }
                                     else if (leftTarget != null || rightTarget != null)
@@ -389,7 +421,7 @@ namespace KinectInterface
             recognizer.SwipeRightDetected += (s, e) =>
             {
                 if (state == states.Home) _homePage.GameShow();
-                //else if (state == states.Profil) profilePage.Right_Swipe(null, null);
+                else if (state == states.Profil) _profileContentPage.PreviousContent();
                 else if (state == states.Game) _gamePage.GameKtype();
             };
 
@@ -397,7 +429,7 @@ namespace KinectInterface
             recognizer.SwipeLeftDetected += (s, e) =>
             {
                 if (state == states.Home) _homePage.ProfileShow();
-                //else if (state == states.Profil) profilePage.Left_Swipe(null, null);
+                else if (state == states.Profil) _profileContentPage.NextContent();
                 else if (state == states.Game) _gamePage.GameQuiz();
             };
 
