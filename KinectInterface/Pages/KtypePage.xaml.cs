@@ -42,11 +42,11 @@ namespace KinectInterface.Pages
         public KtypePage()
         {
             InitializeComponent();
-            ToogleScoreBoard();
             idleTimer = new DispatcherTimer();
             idleTimer.Tick += new EventHandler(this.idleTime);
             idleTimer.Interval = new TimeSpan(0, 0, 1);
             //comment out jika tanpa kinect
+            
             this.keyboard.setBlock(txtPenampung);
         }
 
@@ -87,6 +87,7 @@ namespace KinectInterface.Pages
             score = 0;
             time = 60;
             idleTimer.Start();
+            ToogleScoreBoard();
             reload();
         }
 
@@ -97,6 +98,7 @@ namespace KinectInterface.Pages
             _scorePane.Value = score.ToString();
             _letterPane.Value = hrf.ToString();
             _timePane.Value = time.ToString();
+           
         }
 
         public void GameOver()
@@ -104,8 +106,8 @@ namespace KinectInterface.Pages
             idleTimer.Stop();
             ToogleScoreBoard();
             //testing db score
-            InsertScoreBoard(score);
-            ShowScoreBoard();
+            //InsertScoreBoard(score);
+            //ShowScoreBoard();
             //
             var win = (MainWindow)Window.GetWindow(this);
             win._ktypePage.Visibility = Visibility.Collapsed;
@@ -129,10 +131,14 @@ namespace KinectInterface.Pages
         public void ToogleScoreBoard()
         {
             if (_scoreboard.Visibility == Visibility.Visible)
+            {
                 _scoreboard.Visibility = Visibility.Collapsed;
+                _gameBoard.Visibility = Visibility.Visible;
+            }
             else
             {
                 _scoreboard.Visibility = Visibility.Visible;
+                _gameBoard.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -142,7 +148,7 @@ namespace KinectInterface.Pages
             {
                 con.Open();
 
-                string sql = "select top 5 * from score order by score desc";
+                string sql = "select top 10 * from score order by score desc";
 
                 using (OleDbCommand cmd = new OleDbCommand(sql, con))
                 {   
