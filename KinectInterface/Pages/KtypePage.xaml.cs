@@ -58,6 +58,12 @@ namespace KinectInterface.Pages
             {
                 GameOver();
             }
+            else if (time < -5)
+            {
+                idleTimer.Stop();
+                //exit ktype
+                EndKtype();
+            }
         }
 
         public void cekJawaban(string huruf)
@@ -103,16 +109,11 @@ namespace KinectInterface.Pages
 
         public void GameOver()
         {
-            idleTimer.Stop();
-            ToogleScoreBoard();
             //testing db score
             //InsertScoreBoard(score);
             //ShowScoreBoard();
-            //
-            var win = (MainWindow)Window.GetWindow(this);
-            win._ktypePage.Visibility = Visibility.Collapsed;
-            win._gamePage.Visibility = Visibility.Visible;
-            win.changeState(states.Game );
+            ToogleScoreBoard();
+            time = 0;
         }
 
         public String hurufAcak(int length)
@@ -140,6 +141,14 @@ namespace KinectInterface.Pages
                 _scoreboard.Visibility = Visibility.Visible;
                 _gameBoard.Visibility = Visibility.Collapsed;
             }
+        }
+
+        public void EndKtype()
+        {
+            var win = (MainWindow)Window.GetWindow(this);
+            win._ktypePage.Visibility = Visibility.Collapsed;
+            win._gamePage.Visibility = Visibility.Visible;
+            win.changeState(states.Game);
         }
 
         public void ShowScoreBoard()
