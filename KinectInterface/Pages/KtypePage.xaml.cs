@@ -26,7 +26,7 @@ namespace KinectInterface.Pages
     {
         private int live;
         private int score;
-        private string hrf="";
+        private string hrf = "";
         private int time;
         private DispatcherTimer idleTimer;
 
@@ -46,8 +46,7 @@ namespace KinectInterface.Pages
             idleTimer.Tick += new EventHandler(this.idleTime);
             idleTimer.Interval = new TimeSpan(0, 0, 1);
             //comment out jika tanpa kinect
-            
-            this.keyboard.setBlock(txtPenampung);
+            //this.keyboard.setBlock(txtPenampung);
         }
 
         public void idleTime(object sender, EventArgs e)
@@ -91,7 +90,7 @@ namespace KinectInterface.Pages
         {
             live = 3;
             score = 0;
-            time = 60;
+            time = 3;
             idleTimer.Start();
             ToogleScoreBoard();
             reload();
@@ -111,7 +110,7 @@ namespace KinectInterface.Pages
         {
             //testing db score
             //InsertScoreBoard(score);
-            //ShowScoreBoard();
+            ShowScoreBoard();
             ToogleScoreBoard();
             time = 0;
         }
@@ -131,15 +130,13 @@ namespace KinectInterface.Pages
 
         public void ToogleScoreBoard()
         {
-            if (_scoreboard.Visibility == Visibility.Visible)
+            if (Grid.GetZIndex(_scoreboard) == -1)
             {
-                _scoreboard.Visibility = Visibility.Collapsed;
-                _gameBoard.Visibility = Visibility.Visible;
+                Grid.SetZIndex(_scoreboard, 1);
             }
             else
             {
-                _scoreboard.Visibility = Visibility.Visible;
-                _gameBoard.Visibility = Visibility.Collapsed;
+                Grid.SetZIndex(_scoreboard, -1);
             }
         }
 
@@ -173,7 +170,7 @@ namespace KinectInterface.Pages
             for (int z = 0; z < ds.Tables["score"].Rows.Count - 1; z++)
             {
                 nama = ds.Tables["score"].Rows[z][0].ToString();
-                score = Convert .ToInt32(ds.Tables["score"].Rows[z][1]);
+                score = Convert.ToInt32(ds.Tables["score"].Rows[z][1]);
                 rank.Add(new Rank(z + 1, nama , score));
             }
 

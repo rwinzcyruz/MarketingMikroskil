@@ -6,16 +6,11 @@
              xmlns:m="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:c="clr-namespace:KinectInterface.Controls"
              xmlns:my="clr-namespace:Beginning.Kinect.Framework.Controls;assembly=Beginning.Kinect.Framework"
-             xmlns:cnv="clr-namespace:KinectInterface.Converters" 
              mc:Ignorable="d" 
              d:DesignWidth="1920" d:DesignHeight="1080"
              Width="1920" Height="1080"
              Background="#7FFFFFFF"
              DataContext="{Binding RelativeSource={RelativeSource Self}}">
-
-    <UserControl.Resources>
-        <cnv:WidthConverter x:Key="WidthConverter"/>
-    </UserControl.Resources>
 
     <DockPanel>
         <Label DockPanel.Dock="Top" Template="{DynamicResource TitleBarTemplate}" Content="K-TYPE MASTER">
@@ -24,32 +19,37 @@
             </Label.Resources>
         </Label>
 
-        <DockPanel x:Name="_gameBoard" DockPanel.Dock="Bottom">
-            <UniformGrid DockPanel.Dock="Bottom" Columns="5"
-                         TextBlock.FontSize="{DynamicResource HeaderFontSize}" TextBlock.TextAlignment="Center" d:IsHidden="True">
-                <c:Pane x:Name="_scorePane" Label="skor" Value="0"/>
-                <c:Pane x:Name="_livePane" Label="nyawa" Value="3"/>
-                <c:Pane x:Name="_letterPane" Label="huruf" Value="A"/>
-                <TextBox x:Name="txtPenampung" Visibility="Hidden" TextChanged="txtPenampung_TextChanged"/>
-                <c:Pane x:Name="_timePane" Label="waktu" Value="0"/>
-            </UniformGrid>
-            <!--comment out satu baris di bawah ini jika tanpa kinect-->
-            <my:Keyboard Name="keyboard"/>
-        </DockPanel>
-        
-        <ListView DockPanel.Dock="Bottom" x:Name="_scoreboard" TextBlock.FontSize="{DynamicResource SubHeaderFontSize}"
-                      TextBlock.FontWeight="Light"
-                      ItemsSource="{Binding Rank}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="posisi" DisplayMemberBinding="{Binding Position}"
-                                        Width="381"/>
-                    <GridViewColumn Header="nama" DisplayMemberBinding="{Binding Name}"
-                                        Width="958"/>
-                    <GridViewColumn Header="skor" DisplayMemberBinding="{Binding Score}"
-                                        Width="574"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <Grid>
+            <DockPanel x:Name="_gameBoard" Background="White">
+                <UniformGrid DockPanel.Dock="Bottom" Columns="5"
+                         TextBlock.FontSize="{DynamicResource HeaderFontSize}" TextBlock.TextAlignment="Center">
+                    <c:Pane x:Name="_scorePane" Label="skor" Value="0"/>
+                    <c:Pane x:Name="_livePane" Label="nyawa" Value="3"/>
+                    <c:Pane x:Name="_letterPane" Label="huruf" Value="A"/>
+                    <TextBox x:Name="txtPenampung" Visibility="Hidden" TextChanged="txtPenampung_TextChanged"/>
+                    <c:Pane x:Name="_timePane" Label="waktu" Value="0"/>
+                </UniformGrid>
+                <!--comment out satu baris di bawah ini jika tanpa kinect-->
+                <!--<my:Keyboard Name="keyboard"/>-->
+            </DockPanel>
+
+            <ListView Width="1920" Panel.ZIndex="1" x:Name="_scoreboard" TextBlock.FontSize="{DynamicResource SubHeaderFontSize}"
+                    TextBlock.FontWeight="Light"
+                    ItemsSource="{Binding Rank}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="posisi" DisplayMemberBinding="{Binding Position}"
+                                    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView},
+                                    Converter={StaticResource WidthConverter}, ConverterParameter=0.2*}"/>
+                        <GridViewColumn Header="nama" DisplayMemberBinding="{Binding Name}"
+                                    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView},
+                                    Converter={StaticResource WidthConverter}, ConverterParameter=0.5*}"/>
+                        <GridViewColumn Header="skor" DisplayMemberBinding="{Binding Score}"
+                                    Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListView},
+                                    Converter={StaticResource WidthConverter}, ConverterParameter=0.3*}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
     </DockPanel>
 </UserControl>

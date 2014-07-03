@@ -12,9 +12,10 @@
                ShowMinButton="False"
                ShowCloseButton="False"
                ShowMaxRestoreButton="False"
-               Topmost="False"
+               Topmost="True"
                ResizeMode="NoResize"
-               Background="{StaticResource WindowBackground}">
+               Background="{StaticResource WindowBackground}"
+               Loaded="WindowLoaded">
 
     <Window.Resources>
         <ResourceDictionary>

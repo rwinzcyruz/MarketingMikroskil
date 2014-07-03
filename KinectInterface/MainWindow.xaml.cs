@@ -23,6 +23,9 @@ namespace KinectInterface
 
     public partial class MainWindow : MetroWindow
     {
+        private const int MinimumScreenWidth = 1920;
+        private const int MinimumScreenHeight = 1080;
+
         private IInputElement LeftQuizTarget;
         private IInputElement RightQuizTarget;
 
@@ -39,7 +42,8 @@ namespace KinectInterface
         private bool kinectDisable;
         public MainWindow() {
             InitializeComponent();
-			EventManager.RegisterClassHandler(typeof(Window), Window.KeyDownEvent, new KeyEventHandler(AppHotkeyKeyDown));
+			//Deprecated Key Handler
+            //EventManager.RegisterClassHandler(typeof(Window), Window.KeyDownEvent, new KeyEventHandler(AppHotkeyKeyDown));
             //bagian kinect
             createTpose();
             this.actRecognizer = this.CreateRecognizer();
@@ -484,28 +488,89 @@ namespace KinectInterface
             }
         }
 
-        private void AppHotkeyKeyDown(object source, KeyEventArgs e)
+        //Deprecated Handler
+        //private void AppHotkeyKeyDown(object source, KeyEventArgs e)
+        //{
+        //    if (e.Key == Key.Home)
+        //    {
+        //        _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+        //        _homePage.Visibility = Visibility.Visible;
+        //        changeState(states.Home);
+        //    }
+        //    else if (e.Key == Key.End)
+        //    {
+        //        _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+        //        _welcomePage.Visibility = Visibility.Visible;
+        //        changeState(states.Welcome);
+        //    }
+        //    else if (e.Key == Key.F1)
+        //    {
+        //        _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+        //        _aboutUsPage.Visibility = Visibility.Visible;
+        //    }
+        //    else if (e.Key == Key.Space)
+        //    {
+        //        Flyouts[0].IsOpen = !Flyouts[0].IsOpen;
+        //    }
+        //}
+
+        /// <summary>
+        /// Handles all key up events and closes the window if the Escape key is pressed
+        /// </summary>
+        /// <param name="e">The data for the key up event</param>
+        protected override void OnKeyUp(KeyEventArgs e)
         {
-            if (e.Key == Key.Home)
+            if (null == e)
             {
-                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                _homePage.Visibility = Visibility.Visible;
-                changeState(states.Home);
+                throw new ArgumentNullException("e");
             }
-            else if (e.Key == Key.End)
+
+            switch (e.Key)
             {
-                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                _welcomePage.Visibility = Visibility.Visible;
-                changeState(states.Welcome);
+                case Key.Home:
+                    _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                    _homePage.Visibility = Visibility.Visible;
+                    changeState(states.Home);
+                    break;
+                case Key.End:
+                    _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                    _welcomePage.Visibility = Visibility.Visible;
+                    changeState(states.Welcome);
+                    break;
+                case Key.Space:
+                    Flyouts[0].IsOpen = !Flyouts[0].IsOpen;
+                    break;
+                case Key.F1:
+                    _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
+                    _aboutUsPage.Visibility = Visibility.Visible;
+                    break;
+                case Key.Escape:
+                    this.Close();
+                    break;
             }
-            else if (e.Key == Key.F1)
+
+            base.OnKeyUp(e);
+        }
+
+        /// <summary>
+        /// Handles Window.Loaded event, and prompts user if screen resolution does not meet
+        /// minimal requirements.
+        /// </summary>
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            // get the main screen size
+            double height = SystemParameters.PrimaryScreenHeight;
+            double width = SystemParameters.PrimaryScreenWidth;
+
+            // if the main screen is less than 1920 x 1080 then warn the user it is not the optimal experience 
+            if (width < MinimumScreenWidth || height < MinimumScreenHeight)
             {
-                _layoutRoot.Children.Cast<UserControl>().ToList().ForEach(x => x.Visibility = Visibility.Collapsed);
-                _aboutUsPage.Visibility = Visibility.Visible;
-            }
-            else if (e.Key == Key.Space)
-            {
-                Flyouts[0].IsOpen = !Flyouts[0].IsOpen;
+                MessageBoxResult continueResult = MessageBox.Show(Properties.Resources.SuboptimalScreenResolutionMessage, 
+                    Properties.Resources.SuboptimalScreenResolutionTitle, MessageBoxButton.YesNo);
+                if (continueResult == MessageBoxResult.No)
+                {
+                    this.Close();
+                }
             }
         }
     }
